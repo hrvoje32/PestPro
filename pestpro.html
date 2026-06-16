@@ -1,0 +1,4353 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PEST PRO | Poljski pokusi i registracija sredstava</title>
+  <meta name="description" content="PEST PRO provodi poljske pokuse i ispitivanja ucinkovitosti sredstava za zastitu bilja u Hrvatskoj uz GEP i EPPO standarde, ARM izvjestaje i podrsku za registraciju.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+  <style>
+    :root {
+      color-scheme: dark;
+      --header-offset: 76px;
+      --bg: #060b08;
+      --bg-soft: #0c1511;
+      --panel: rgba(13, 23, 18, 0.82);
+      --panel-strong: rgba(17, 28, 22, 0.94);
+      --line: rgba(164, 194, 120, 0.16);
+      --line-strong: rgba(164, 194, 120, 0.28);
+      --text: #ecf4ee;
+      --muted: #a8b9ab;
+      --accent: #28bd86;
+      --accent-strong: #c5e77b;
+      --accent-alt: #28bd86;
+      --warn: #f1c96f;
+      --shadow: 0 28px 120px rgba(0, 0, 0, 0.42);
+      --radius: 22px;
+      --radius-sm: 14px;
+      --content: min(1180px, calc(100% - 2rem));
+      --space-unit: clamp(1rem, 1.15vw, 1.25rem);
+      --space-xs: calc(var(--space-unit) * 0.5);
+      --space-sm: calc(var(--space-unit) * 0.75);
+      --space-md: var(--space-unit);
+      --space-lg: calc(var(--space-unit) * 1.5);
+      --space-xl: calc(var(--space-unit) * 2);
+      --space-2xl: calc(var(--space-unit) * 3);
+      --section-space: clamp(4rem, 8vw, 7rem);
+      --section-shell-pad: var(--space-xl);
+      --section-gap: var(--space-md);
+      --section-head-gap: var(--space-xl);
+      --section-head-margin: var(--space-xl);
+      --card-pad: var(--space-md);
+      --card-pad-lg: var(--space-lg);
+      --card-gap: var(--space-md);
+      --compact-gap: var(--space-md);
+      --parallax-limit: 58px;
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      scroll-behavior: smooth;
+      --hero-overlay:
+        linear-gradient(90deg, rgba(5, 10, 7, 0.74) 0%, rgba(5, 10, 7, 0.52) 34%, rgba(5, 10, 7, 0.18) 64%, rgba(5, 10, 7, 0.62) 100%),
+        linear-gradient(180deg, rgba(5, 10, 7, 0.06) 0%, rgba(5, 10, 7, 0.42) 100%);
+      --hero-photo-filter: saturate(0.98) brightness(0.74) contrast(1.06);
+      --surface-soft: rgba(255,255,255,0.03);
+      --surface-border: rgba(255,255,255,0.06);
+      --header-bg: rgba(6, 11, 8, 0.78);
+      --header-border: rgba(164, 194, 120, 0.1);
+      --text-shadow-hero: 0 18px 60px rgba(0, 0, 0, 0.38);
+      --canvas-grid: rgba(164, 194, 120, 0.05);
+      --canvas-line: rgba(164, 194, 120, 0.16);
+      --canvas-band-a: rgba(183, 223, 88, 0.08);
+      --canvas-band-b: rgba(88, 199, 174, 0.03);
+      --canvas-band-c: rgba(241, 201, 111, 0.05);
+      --particle-a: 183, 223, 88;
+      --particle-b: 88, 199, 174;
+      --hero-glow-a: rgba(136, 184, 63, 0.18);
+      --hero-glow-b: rgba(95, 178, 157, 0.12);
+    }
+
+    html[data-theme="light"] {
+      color-scheme: light;
+      --bg: #f3f8ff;
+      --bg-soft: #eaf1fb;
+      --panel: rgba(255, 255, 255, 0.8);
+      --panel-strong: rgba(255, 255, 255, 0.94);
+      --line: rgba(33, 77, 158, 0.12);
+      --line-strong: rgba(33, 77, 158, 0.18);
+      --text: #10203a;
+      --muted: #5f7090;
+      --accent: #28bd86;
+      --accent-strong: #28bd86;
+      --accent-alt: #236eff;
+      --warn: #c28f28;
+      --shadow: 0 20px 56px rgba(25, 47, 94, 0.1);
+      --hero-overlay:
+        linear-gradient(90deg, rgba(246, 250, 244, 0.7) 0%, rgba(246, 250, 244, 0.46) 34%, rgba(246, 250, 244, 0.16) 64%, rgba(246, 250, 244, 0.62) 100%),
+        linear-gradient(180deg, rgba(244, 248, 240, 0.02) 0%, rgba(233, 240, 228, 0.36) 100%);
+      --hero-photo-filter: saturate(1.02) brightness(0.98) contrast(1.03);
+      --surface-soft: rgba(127, 174, 53, 0.05);
+      --surface-border: rgba(31, 61, 132, 0.1);
+      --header-bg: rgba(248, 251, 255, 0.9);
+      --header-border: rgba(31, 61, 132, 0.08);
+      --text-shadow-hero: none;
+      --canvas-grid: rgba(31, 61, 132, 0.05);
+      --canvas-line: rgba(35, 110, 255, 0.14);
+      --canvas-band-a: rgba(127, 174, 53, 0.11);
+      --canvas-band-b: rgba(35, 110, 255, 0.06);
+      --canvas-band-c: rgba(127, 174, 53, 0.04);
+      --particle-a: 127, 174, 53;
+      --particle-b: 35, 110, 255;
+      --hero-glow-a: rgba(127, 174, 53, 0.12);
+      --hero-glow-b: rgba(35, 110, 255, 0.08);
+    }
+
+    * {
+      box-sizing: border-box;
+      line-height: 1.5em;
+    }
+
+    html {
+      background:
+        radial-gradient(circle at 15% 20%, rgba(183, 223, 88, 0.08), transparent 22%),
+        radial-gradient(circle at 82% 12%, rgba(88, 199, 174, 0.11), transparent 20%),
+        linear-gradient(180deg, #07100c 0%, #050906 100%);
+    }
+
+    html[data-theme="light"] {
+      background:
+        radial-gradient(circle at 16% 18%, rgba(35, 110, 255, 0.12), transparent 22%),
+        radial-gradient(circle at 84% 10%, rgba(112, 184, 69, 0.12), transparent 18%),
+        linear-gradient(180deg, #f7fbff 0%, #edf3fc 100%);
+    }
+
+    body {
+      margin: 0;
+      color: var(--text);
+      background: transparent;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+      height: auto;
+    }
+
+    button,
+    input,
+    textarea {
+      font: inherit;
+    }
+
+    .shell {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .shell::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(circle at 14% 22%, var(--hero-glow-a), transparent 24%),
+        radial-gradient(circle at 84% 18%, var(--hero-glow-b), transparent 20%),
+        linear-gradient(180deg, rgba(255,255,255,0.01), transparent 22%);
+      mask-image: linear-gradient(180deg, rgba(0,0,0,0.5), rgba(0,0,0,0.12));
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.78;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      backdrop-filter: blur(14px);
+      background: var(--header-bg);
+      border-bottom: 1px solid var(--header-border);
+      box-shadow: 0 10px 34px rgba(0, 0, 0, 0.08);
+    }
+
+    .header-inner,
+    .hero-grid,
+    .section-inner,
+    .footer-inner {
+      width: var(--content);
+      margin: 0 auto;
+    }
+
+    .header-inner {
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr) auto;
+      align-items: center;
+      gap: var(--section-gap);
+      padding: var(--space-sm) 0;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-sm);
+      min-width: 0;
+      padding: 0.35rem 0.65rem;
+      border-radius: 16px;
+      background: rgba(255,255,255,0.96);
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.12);
+    }
+
+    .brand-logo {
+      width: auto;
+      height: 42px;
+      object-fit: contain;
+      flex: 0 0 auto;
+    }
+
+    html[data-theme="light"] .brand {
+      background: rgba(255,255,255,0.88);
+      box-shadow: 0 8px 18px rgba(25, 47, 94, 0.08);
+    }
+
+    .brand-copy {
+      display: grid;
+      gap: 0.1rem;
+    }
+
+    .brand-copy strong {
+      font-size: 0.96rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    .brand-copy span {
+      color: var(--muted);
+      font-size: 0.78rem;
+    }
+
+    .nav-toggle {
+      display: none;
+      width: 46px;
+      height: 46px;
+      border: 1px solid var(--line-strong);
+      border-radius: 15px;
+      background: var(--surface-soft);
+      color: var(--text);
+      cursor: pointer;
+    }
+
+    .nav-toggle span,
+    .nav-toggle span::before,
+    .nav-toggle span::after {
+      content: "";
+      display: block;
+      width: 18px;
+      height: 2px;
+      margin: 0 auto;
+      background: currentColor;
+      border-radius: 99px;
+      transition: transform 0.25s ease, opacity 0.25s ease;
+    }
+
+    .nav-toggle span::before {
+      transform: translateY(-6px);
+    }
+
+    .nav-toggle span::after {
+      transform: translateY(4px);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: var(--section-gap);
+      flex-wrap: wrap;
+      min-width: 0;
+      padding-inline: 1.25rem 0;
+    }
+
+    .nav a {
+      color: var(--muted);
+      font-size: 0.92rem;
+      font-weight: 600;
+      padding: 0.45rem 0.7rem;
+      border-radius: 999px;
+      transition: color 0.2s ease, background 0.2s ease;
+    }
+
+    .nav a:hover,
+    .nav a:focus-visible {
+      color: var(--text);
+      background: rgba(255,255,255,0.05);
+    }
+
+    .header-cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 46px;
+      padding: 0.82rem 1.15rem;
+      border-radius: 999px;
+      background: linear-gradient(135deg, rgba(136, 184, 63, 0.2), rgba(136, 184, 63, 0.1));
+      border: 1px solid rgba(136, 184, 63, 0.22);
+      color: var(--accent-strong);
+      font-weight: 700;
+      white-space: nowrap;
+      box-shadow: 0 12px 28px rgba(136, 184, 63, 0.12);
+    }
+
+    .header-actions {
+      display: inline-flex;
+      align-items: center;
+      justify-self: end;
+      gap: var(--space-sm);
+    }
+
+    .language-select {
+      min-height: 46px;
+      padding: 0.55rem 2.2rem 0.55rem 0.9rem;
+      border-radius: 999px;
+      border: 1px solid var(--line-strong);
+      background: var(--surface-soft);
+      color: var(--text);
+      appearance: none;
+      -webkit-appearance: none;
+      cursor: pointer;
+      font-weight: 600;
+      background-image:
+        linear-gradient(45deg, transparent 50%, currentColor 50%),
+        linear-gradient(135deg, currentColor 50%, transparent 50%);
+      background-position:
+        calc(100% - 1rem) calc(50% - 2px),
+        calc(100% - 0.72rem) calc(50% - 2px);
+      background-size: 6px 6px, 6px 6px;
+      background-repeat: no-repeat;
+    }
+
+    .language-select:focus-visible {
+      outline: 2px solid rgba(136, 184, 63, 0.32);
+      outline-offset: 2px;
+    }
+
+    .theme-toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-sm);
+      min-height: 46px;
+      padding: 0.55rem 0.85rem;
+      border-radius: 999px;
+      border: 1px solid var(--line-strong);
+      background: var(--surface-soft);
+      color: var(--text);
+      cursor: pointer;
+      transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+    }
+
+    .theme-toggle:hover,
+    .theme-toggle:focus-visible {
+      transform: translateY(-1px);
+      border-color: var(--accent);
+    }
+
+    .theme-toggle-track {
+      position: relative;
+      width: 42px;
+      height: 24px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, rgba(183, 223, 88, 0.26), rgba(88, 199, 174, 0.2));
+      border: 1px solid var(--line);
+      flex: 0 0 auto;
+    }
+
+    .theme-toggle-thumb {
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      width: 18px;
+      height: 18px;
+      border-radius: 999px;
+      background: #fff;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.18);
+      transition: transform 0.24s ease;
+    }
+
+    html[data-theme="light"] .theme-toggle-thumb {
+      transform: translateX(18px);
+    }
+
+    .theme-label {
+      font-size: 0.88rem;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .hero {
+      position: relative;
+      min-height: calc(100svh - var(--header-offset));
+      display: flex;
+      align-items: center;
+      padding: clamp(2.6rem, 6vw, 5.2rem) 0 clamp(4rem, 8vw, 6rem);
+      overflow: clip;
+    }
+
+    .hero-photo {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .hero-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 58%;
+      filter: var(--hero-photo-filter);
+    }
+
+    .hero-photo::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: var(--hero-overlay);
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: auto auto 10% -8%;
+      width: 34vw;
+      height: 34vw;
+      min-width: 260px;
+      min-height: 260px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(183,223,88,0.22), transparent 70%);
+      filter: blur(30px);
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    html[data-theme="light"] .hero::before {
+      background: radial-gradient(circle, rgba(35,110,255,0.16), transparent 70%);
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(120deg, transparent 0%, rgba(255,255,255,0.04) 44%, transparent 62%),
+        linear-gradient(180deg, rgba(0,0,0,0.01) 0%, rgba(0,0,0,0.1) 100%);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    #hero-canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      display: block;
+      opacity: 0.06;
+      z-index: 0;
+    }
+
+    .hero-grid {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: minmax(0, 0.92fr) minmax(24rem, 1.08fr);
+      gap: clamp(1.5rem, 4vw, 4rem);
+      align-items: center;
+      min-height: clamp(36rem, 72vh, 48rem);
+      isolation: isolate;
+    }
+
+    .hero-copy {
+      display: grid;
+      justify-items: start;
+      gap: var(--space-lg);
+      max-width: min(920px, 100%);
+      margin: 0;
+      padding: clamp(1.6rem, 3vw, 2rem) clamp(1.25rem, 3vw, 2rem);
+      border-radius: 28px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: linear-gradient(180deg, rgba(10, 16, 13, 0.42), rgba(10, 16, 13, 0.62));
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.22);
+      backdrop-filter: blur(14px);
+      text-align: left;
+      text-shadow: var(--text-shadow-hero);
+      position: relative;
+      z-index: 3;
+      order: 1;
+    }
+
+    .hero-copy > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-stat-row {
+      width: 100%;
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 0.8rem;
+      margin-top: 0.15rem;
+      align-items: stretch;
+    }
+
+    .hero-stat {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.38rem;
+      min-width: 0;
+      min-height: 100%;
+      padding: 0.95rem 0.85rem 0.9rem;
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,0.1);
+      background: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
+      box-shadow: 0 14px 32px rgba(0, 0, 0, 0.12);
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .hero-stat strong {
+      display: block;
+      width: 100%;
+      min-width: 0;
+      color: var(--accent-strong);
+      font-size: clamp(0.95rem, 1.5vw, 1.05rem);
+      line-height: 1em;
+      letter-spacing: -0.03em;
+      text-align: center;
+      overflow-wrap: anywhere;
+    }
+
+    .hero-stat span {
+      display: block;
+      width: 100%;
+      max-width: 16ch;
+      min-width: 0;
+      margin: 0 auto;
+      color: var(--text);
+      font-size: 0.75rem;
+      line-height: 1.35em;
+      text-wrap: balance;
+      text-align: center;
+      overflow-wrap: anywhere;
+    }
+
+    .hero-float-scene {
+      position: relative;
+      width: 100%;
+      min-height: clamp(30rem, 54vw, 42rem);
+      pointer-events: none;
+      z-index: 4;
+      order: 2;
+      justify-self: end;
+      max-width: 46rem;
+    }
+
+    .hero-float-scene::before {
+      content: "";
+      position: absolute;
+      inset: 18% 18%;
+      border-radius: 50%;
+      background:
+        radial-gradient(circle, rgba(197, 231, 123, 0.12), rgba(40, 189, 134, 0.04) 42%, transparent 72%);
+      filter: blur(8px);
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .hero-float-scene::after {
+      content: "";
+      position: absolute;
+      inset: 29% 29%;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: radial-gradient(circle, rgba(255,255,255,0.04), transparent 68%);
+      box-shadow: inset 0 0 40px rgba(255,255,255,0.04);
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .hero-wireframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      overflow: visible;
+    }
+
+    .hero-wireframe path {
+      fill: none;
+      stroke: rgba(197, 231, 123, 0.2);
+      stroke-width: 1.4;
+      stroke-linecap: round;
+      stroke-dasharray: 6 9;
+      filter: drop-shadow(0 0 10px rgba(197, 231, 123, 0.08));
+      animation: heroWire 18s linear infinite;
+    }
+
+    .hero-wire-core {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 4.5rem;
+      height: 4.5rem;
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.12);
+      background:
+        radial-gradient(circle, rgba(197, 231, 123, 0.2), rgba(40, 189, 134, 0.08) 52%, rgba(255,255,255,0.03) 72%);
+      box-shadow:
+        0 0 0 10px rgba(255,255,255,0.03),
+        0 20px 44px rgba(0, 0, 0, 0.18);
+      z-index: 2;
+    }
+
+    .hero-wire-core::before,
+    .hero-wire-core::after {
+      content: "";
+      position: absolute;
+      inset: 0.75rem;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .hero-wire-core::after {
+      inset: 1.45rem;
+      background: rgba(255,255,255,0.12);
+      border: 0;
+    }
+
+    .hero-float-media {
+      position: absolute;
+      margin: 0;
+      overflow: hidden;
+      border-radius: 26px;
+      border: 1px solid rgba(255,255,255,0.12);
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.22);
+      background: rgba(10, 16, 13, 0.62);
+      backdrop-filter: blur(12px);
+      z-index: 3;
+    }
+
+    .hero-float-media::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(180deg, rgba(0,0,0,0.04), rgba(0,0,0,0.32)),
+        linear-gradient(135deg, rgba(255,255,255,0.08), transparent 45%);
+      pointer-events: none;
+    }
+
+    .hero-float-media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transform: scale(1.06);
+    }
+
+    .hero-float-badge {
+      position: absolute;
+      left: 0.9rem;
+      right: 0.9rem;
+      bottom: 0.9rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 0;
+      min-height: 2rem;
+      padding: 0.5rem 0.75rem;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(8, 14, 11, 0.52);
+      color: #f5faf4;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      line-height: 1.15em;
+      text-align: center;
+      text-transform: uppercase;
+      overflow-wrap: anywhere;
+      backdrop-filter: blur(10px);
+    }
+
+    .hero-float-media.is-a {
+      top: 7%;
+      left: 5%;
+      width: clamp(10.4rem, 16vw, 13rem);
+      aspect-ratio: 0.88;
+      transform: rotate(-8deg);
+      animation: floatCardA 8s ease-in-out infinite;
+    }
+
+    .hero-float-media.is-b {
+      top: 10%;
+      right: 4%;
+      width: clamp(11rem, 18vw, 14rem);
+      aspect-ratio: 1.06;
+      transform: rotate(7deg);
+      animation: floatCardB 9s ease-in-out infinite;
+    }
+
+    .hero-float-media.is-c {
+      left: 8%;
+      bottom: 11%;
+      width: clamp(10.6rem, 17vw, 13rem);
+      aspect-ratio: 1.12;
+      transform: rotate(-5deg);
+      animation: floatCardC 10s ease-in-out infinite;
+    }
+
+    .hero-float-media.is-d {
+      right: 8%;
+      bottom: 13%;
+      width: clamp(10.7rem, 17vw, 13rem);
+      aspect-ratio: 0.92;
+      transform: rotate(5deg);
+      animation: floatCardB 10.5s ease-in-out infinite;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-sm);
+      padding: var(--space-sm) var(--space-md);
+      border-radius: 999px;
+      border: 1px solid rgba(183, 223, 88, 0.18);
+      background: rgba(183, 223, 88, 0.08);
+      color: var(--accent-strong);
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      line-height: 1.1em;
+      text-transform: uppercase;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: var(--accent);
+      box-shadow: 0 0 18px rgba(183, 223, 88, 0.5);
+    }
+
+    .hero h1 {
+      margin: 0;
+      font-size: clamp(3.3rem, 7vw, 5.6rem);
+      line-height: 1.1em;
+      letter-spacing: -0.04em;
+      max-width: 11ch;
+      text-wrap: balance;
+    }
+
+    .hero h1 .accent {
+      color: var(--accent-strong);
+      line-height: 1.1em;
+    }
+
+    .hero-lead {
+      max-width: 36rem;
+      margin: 0 0 var(--section-head-margin);
+      color: color-mix(in srgb, var(--text) 68%, var(--muted) 32%);
+      font-size: 1.04rem;
+      line-height: 1.4em;
+    }
+
+    .project-overview {
+      position: relative;
+      padding: 0 0 var(--section-space);
+      z-index: 3;
+    }
+
+    .project-overview-inner {
+      width: var(--content);
+      margin: calc(var(--space-xl) * -1) auto 0;
+      max-width: none;
+    }
+
+    .hero-summary,
+    .hero-gallery-shell {
+      padding: clamp(1.6rem, 3vw, 2.25rem);
+      border-radius: 28px;
+      border: 1px solid rgba(255,255,255,0.09);
+      background: linear-gradient(180deg, rgba(15, 24, 19, 0.9), rgba(8, 14, 11, 0.96));
+      box-shadow: 0 30px 70px rgba(0, 0, 0, 0.24);
+      backdrop-filter: blur(18px);
+    }
+
+    .hero-summary {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--space-xl);
+      align-items: start;
+      min-height: 100%;
+      transition: opacity 0.28s ease;
+    }
+
+    .hero-summary-intro {
+      display: grid;
+      gap: 0.9rem;
+      width: 100%;
+      padding-bottom: 1.2rem;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .hero-summary-intro .section-kicker {
+      margin-bottom: 0;
+    }
+
+    .hero-summary-intro h2 {
+      margin: 0;
+      font-size: clamp(2rem, 3.3vw, 3rem);
+      line-height: 1.1em;
+      letter-spacing: -0.035em;
+      max-width: none;
+      text-wrap: balance;
+    }
+
+    .hero-summary-body {
+      display: grid;
+      gap: var(--space-lg);
+      align-content: start;
+      width: 100%;
+    }
+
+    .hero-summary .hero-lead {
+      max-width: none;
+      margin: 0;
+      font-size: 1.02rem;
+      line-height: 1.68em;
+      max-width: 64ch;
+    }
+
+    .hero-summary .hero-actions {
+      margin: 0;
+    }
+
+    .hero-summary .hero-meta {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      max-width: none;
+      margin-top: 0;
+      gap: 0.85rem;
+    }
+
+    .hero-gallery {
+      position: relative;
+      padding: 0 0 var(--section-space);
+      z-index: 3;
+    }
+
+    .hero-gallery-inner {
+      width: var(--content);
+      margin: 0 auto;
+      display: grid;
+      gap: var(--space-xl);
+    }
+
+    .hero-gallery-head {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--space-md);
+      align-items: start;
+    }
+
+    .hero-gallery-head h2 {
+      margin: 0;
+      font-size: clamp(2.15rem, 4vw, 3.65rem);
+      line-height: 1.1em;
+      letter-spacing: -0.035em;
+      max-width: none;
+      text-wrap: balance;
+    }
+
+    .hero-gallery-head p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 1.02rem;
+      line-height: 1.68em;
+      max-width: 38rem;
+    }
+
+    .hero-gallery-shell {
+      position: relative;
+      overflow: hidden;
+      padding: clamp(1.2rem, 2vw, 1.5rem);
+      background:
+        radial-gradient(circle at 14% 18%, rgba(197, 231, 123, 0.1), transparent 24%),
+        radial-gradient(circle at 84% 14%, rgba(40, 189, 134, 0.12), transparent 22%),
+        linear-gradient(180deg, rgba(12, 20, 16, 0.94), rgba(6, 10, 8, 0.98));
+    }
+
+    .gallery-progress {
+      position: relative;
+      height: 4px;
+      margin: 0 0 1rem;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.08);
+      overflow: hidden;
+    }
+
+    .gallery-progress-bar {
+      display: block;
+      width: 100%;
+      height: 100%;
+      transform-origin: left center;
+      transform: scaleX(0);
+      background: linear-gradient(90deg, var(--accent), var(--accent-strong));
+      box-shadow: 0 0 18px rgba(197, 231, 123, 0.3);
+    }
+
+    .gallery-progress-bar.is-running {
+      animation: galleryProgress 5.2s linear forwards;
+    }
+
+    .hero-gallery-shell::before {
+      content: "";
+      position: absolute;
+      inset: 0 0 auto 0;
+      height: 180px;
+      background: linear-gradient(180deg, rgba(197, 231, 123, 0.08), transparent);
+      pointer-events: none;
+    }
+
+    .hero-gallery-shell::after {
+      content: "";
+      position: absolute;
+      inset: auto 0 0 0;
+      height: 30%;
+      background: linear-gradient(180deg, transparent, rgba(0,0,0,0.24));
+      pointer-events: none;
+    }
+
+    .hero-gallery-shell {
+      --gallery-gap: 1.05rem;
+      --gallery-speed: 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      --gallery-closed: 5.25rem;
+      --gallery-open: 29rem;
+    }
+
+    .gallery-center-controls {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      justify-content: flex-end;
+      gap: 0.6rem;
+      margin-bottom: 1rem;
+    }
+
+    .gallery-nav-btn {
+      width: 2.7rem;
+      height: 2.7rem;
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 999px;
+      background: rgba(255,255,255,0.06);
+      color: var(--text);
+      font-size: 1.5rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background 0.22s ease, border-color 0.22s ease, transform 0.22s ease;
+    }
+
+    .gallery-nav-btn:hover,
+    .gallery-nav-btn:focus-visible {
+      background: rgba(255,255,255,0.12);
+      border-color: rgba(255,255,255,0.18);
+      transform: translateY(-1px);
+    }
+
+    .gallery-nav-btn:disabled {
+      opacity: 0.32;
+      cursor: default;
+      transform: none;
+    }
+
+    .gallery-center-slider {
+      position: relative;
+      z-index: 2;
+      overflow: hidden;
+    }
+
+    .gallery-center-track {
+      display: flex;
+      gap: var(--gallery-gap);
+      align-items: flex-start;
+      justify-content: center;
+      overflow: auto;
+      scroll-behavior: smooth;
+      scroll-snap-type: x mandatory;
+      padding-bottom: 1.6rem;
+      scrollbar-width: none;
+    }
+
+    .gallery-center-track::-webkit-scrollbar {
+      display: none;
+    }
+
+    .gallery-project-card {
+      position: relative;
+      flex: 0 0 var(--gallery-closed);
+      height: 29rem;
+      border-radius: 1.2rem;
+      overflow: hidden;
+      cursor: pointer;
+      transition: flex-basis var(--gallery-speed), transform var(--gallery-speed), box-shadow var(--gallery-speed);
+      scroll-snap-align: center;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .gallery-project-card[active] {
+      flex-basis: var(--gallery-open);
+      transform: translateY(-6px);
+      box-shadow: 0 22px 58px rgba(0, 0, 0, 0.38);
+    }
+
+    .gallery-project-card__bg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: brightness(0.68) saturate(0.82);
+      transition: filter 0.3s ease, transform var(--gallery-speed);
+    }
+
+    .gallery-project-card:hover .gallery-project-card__bg {
+      filter: brightness(0.84) saturate(0.96);
+      transform: scale(1.05);
+    }
+
+    .gallery-project-card__content {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0;
+      background: linear-gradient(180deg, rgba(8, 13, 11, 0.12) 24%, rgba(5, 8, 7, 0.88) 100%);
+      z-index: 2;
+    }
+
+    .gallery-project-card__title {
+      color: #fff;
+      font-weight: 700;
+      font-size: 1.34rem;
+      writing-mode: vertical-rl;
+      transform: rotate(180deg);
+      letter-spacing: -0.01em;
+    }
+
+    .gallery-project-card__thumb,
+    .gallery-project-card__desc,
+    .gallery-project-card__btn {
+      display: none;
+    }
+
+    .gallery-project-card[active] .gallery-project-card__content {
+      flex-direction: row;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 1.45rem 1.55rem;
+      gap: 0.9rem;
+    }
+
+    .gallery-project-card[active] .gallery-project-card__title {
+      writing-mode: horizontal-tb;
+      transform: none;
+      font-size: 2.35rem;
+      text-wrap: balance;
+    }
+
+    .gallery-project-card[active] .gallery-project-card__thumb,
+    .gallery-project-card[active] .gallery-project-card__desc {
+      display: block;
+    }
+
+    .gallery-project-card[active] .gallery-project-card__btn {
+      display: inline-flex;
+    }
+
+    .gallery-project-card__thumb {
+      width: 220px;
+      height: 320px;
+      border-radius: 0.6rem;
+      object-fit: cover;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.38);
+      flex: 0 0 auto;
+    }
+
+    .gallery-project-card__desc {
+      color: rgba(255,255,255,0.82);
+      font-size: 1rem;
+      line-height: 1.5em;
+      max-width: 14rem;
+      margin-top: 0.45rem;
+      margin-bottom: 1rem;
+    }
+
+    .gallery-project-card__btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 2.6rem;
+      padding: 0.65rem 1.15rem;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.1);
+      background: linear-gradient(135deg, var(--accent), var(--accent-strong));
+      color: #14200f;
+      font-size: 0.88rem;
+      font-weight: 700;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: var(--compact-gap);
+      flex-wrap: wrap;
+      margin-bottom: var(--section-head-margin);
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 52px;
+      padding: 0.95rem 1.35rem;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      font-weight: 700;
+      line-height: 1.1em;
+      transition: transform 0.22s ease, border-color 0.22s ease, background 0.22s ease;
+    }
+
+    .button:hover,
+    .button:focus-visible {
+      transform: translateY(-1px);
+    }
+
+    .button-primary {
+      background: linear-gradient(135deg, var(--accent), #d6ef7e);
+      color: #14200f;
+      box-shadow: 0 14px 34px rgba(136, 184, 63, 0.18);
+    }
+
+    .button-secondary {
+      border-color: rgba(255,255,255,0.14);
+      background: rgba(255,255,255,0.03);
+      color: var(--text);
+    }
+
+    .hero-meta {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: var(--section-gap);
+      max-width: 760px;
+      margin-top: var(--section-head-margin);
+      align-items: stretch;
+    }
+
+    .meta-card {
+      min-height: auto;
+      padding: 1rem 1.05rem;
+      border-radius: 16px;
+      background: rgba(255,255,255,0.045);
+      border: 1px solid rgba(255,255,255,0.08);
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
+      backdrop-filter: blur(10px);
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.42rem;
+      min-height: 100%;
+    }
+
+
+    .meta-card strong {
+      display: block;
+      min-height: 2.4em;
+      width: 100%;
+      margin-bottom: 0;
+      color: var(--accent-strong);
+      font-size: 0.82rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      line-height: 1.15em;
+      text-wrap: balance;
+    }
+
+    .meta-card span {
+      color: var(--muted);
+      font-size: 0.94rem;
+      line-height: 1.45em;
+      width: 100%;
+    }
+
+    .hero-panel {
+      position: relative;
+      padding: 0;
+      border-radius: 22px;
+      background: transparent;
+      border: 0;
+      box-shadow: none;
+      overflow: hidden;
+      justify-self: stretch;
+      max-width: none;
+      width: 100%;
+    }
+
+    .hero-summary.is-swapping,
+    .hero-panel.is-swapping {
+      opacity: 0.72;
+    }
+
+    .panel-image {
+      position: relative;
+      aspect-ratio: 16 / 9;
+      border-radius: 22px;
+      overflow: hidden;
+      min-height: 540px;
+      background: #101714;
+      border: 1px solid rgba(255,255,255,0.1);
+      box-shadow: 0 28px 74px rgba(0,0,0,0.22);
+    }
+
+    .panel-image::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(180deg, rgba(0,0,0,0.04), rgba(0,0,0,0.26)),
+        linear-gradient(90deg, rgba(0,0,0,0.12), transparent 28%, transparent 72%, rgba(0,0,0,0.16));
+      pointer-events: none;
+    }
+
+    .panel-slide {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      transform: scale(1.03);
+      transition: opacity 0.85s ease, transform 1.25s cubic-bezier(0.22, 1, 0.36, 1);
+      pointer-events: none;
+    }
+
+    .panel-slide.is-active {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    .panel-slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 54%;
+      transform: scale(1.02);
+      filter: saturate(0.96) contrast(1.02);
+    }
+
+    .panel-slide:nth-child(1).is-active img {
+      animation: cinematicPanA 6.4s ease forwards;
+    }
+
+    .panel-slide:nth-child(2).is-active img {
+      animation: cinematicPanB 6.4s ease forwards;
+    }
+
+    .panel-slide:nth-child(3).is-active img {
+      animation: cinematicPanC 6.4s ease forwards;
+    }
+
+    .panel-badge {
+      position: absolute;
+      top: 1.1rem;
+      left: 1rem;
+      right: 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: var(--section-gap);
+    }
+
+    .badge-chip,
+    .panel-note {
+      border-radius: 14px;
+      border: 1px solid var(--surface-border);
+      background: rgba(6, 10, 8, 0.56);
+      backdrop-filter: blur(12px);
+      transition: transform 0.45s ease, opacity 0.45s ease, border-color 0.25s ease;
+    }
+
+    .badge-chip {
+      padding: var(--card-pad);
+      max-width: 190px;
+    }
+
+    .badge-chip strong,
+    .panel-note strong {
+      display: block;
+      font-size: 0.82rem;
+      color: var(--accent-strong);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      margin-bottom: var(--space-xs);
+    }
+
+    .badge-chip span,
+    .panel-note span {
+      color: var(--text);
+      font-size: 0.92rem;
+    }
+
+    .panel-note {
+      position: absolute;
+      right: 1rem;
+      bottom: 1rem;
+      width: min(270px, calc(100% - 2rem));
+      padding: var(--card-pad);
+      box-shadow: 0 12px 34px rgba(0,0,0,0.18);
+    }
+
+    .hero-panel.is-swapping .badge-chip,
+    .hero-panel.is-swapping .panel-note {
+      transform: translateY(10px);
+      opacity: 0.58;
+    }
+
+    .hero-strip {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: var(--section-gap);
+      margin-top: var(--space-xl);
+      padding-top: var(--space-lg);
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .panel-controls {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--compact-gap);
+      margin-top: var(--space-lg);
+      padding-top: var(--space-lg);
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .panel-slider-nav {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .panel-slider-button {
+      width: 42px;
+      height: 42px;
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 999px;
+      background: rgba(255,255,255,0.04);
+      color: var(--text);
+      cursor: pointer;
+      transition: background 0.2s ease, border-color 0.2s ease;
+    }
+
+    .panel-slider-button:hover,
+    .panel-slider-button:focus-visible {
+      background: rgba(255,255,255,0.08);
+      border-color: rgba(255,255,255,0.14);
+      transform: translateY(-1px);
+    }
+
+    .panel-slider-dots {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-sm);
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .panel-slider-dot {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      border: 0;
+      background: transparent;
+      color: var(--muted);
+      cursor: pointer;
+      padding: 0;
+      font-size: 0.78rem;
+      font-weight: 600;
+      line-height: 1.1em;
+    }
+
+    .panel-slider-dot::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.22);
+      transition: background 0.2s ease, transform 0.2s ease;
+    }
+
+    .panel-slider-dot.is-active {
+      color: var(--text);
+    }
+
+    .panel-slider-dot.is-active::before {
+      background: var(--accent);
+      transform: scale(1.15);
+    }
+
+    .strip-card {
+      padding: 1rem 1.05rem;
+      border-radius: 16px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.025));
+      border: 1px solid rgba(255,255,255,0.08);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.04);
+    }
+
+    .strip-card strong {
+      display: block;
+      margin-bottom: var(--space-xs);
+      font-size: 1.2rem;
+      color: var(--text);
+    }
+
+    .strip-card span {
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+
+    @keyframes cinematicPanA {
+      0% { transform: scale(1.04) translate3d(0, 0, 0); }
+      100% { transform: scale(1.14) translate3d(-1.6%, -1.2%, 0); }
+    }
+
+    @keyframes cinematicPanB {
+      0% { transform: scale(1.05) translate3d(0, 0, 0); }
+      100% { transform: scale(1.15) translate3d(1.2%, -1.6%, 0); }
+    }
+
+    @keyframes cinematicPanC {
+      0% { transform: scale(1.04) translate3d(0, 0, 0); }
+      100% { transform: scale(1.13) translate3d(-0.8%, 1.2%, 0); }
+    }
+
+    @keyframes galleryProgress {
+      from { transform: scaleX(0); }
+      to { transform: scaleX(1); }
+    }
+
+    @keyframes floatCardA {
+      0%, 100% { transform: translate3d(0, 0, 0) rotate(-8deg); }
+      50% { transform: translate3d(0, -16px, 0) rotate(-5deg); }
+    }
+
+    @keyframes floatCardB {
+      0%, 100% { transform: translate3d(0, 0, 0) rotate(7deg); }
+      50% { transform: translate3d(0, -12px, 0) rotate(4deg); }
+    }
+
+    @keyframes floatCardC {
+      0%, 100% { transform: translate3d(0, 0, 0) rotate(-5deg); }
+      50% { transform: translate3d(0, -14px, 0) rotate(-2deg); }
+    }
+
+    @keyframes heroWire {
+      from { stroke-dashoffset: 0; }
+      to { stroke-dashoffset: -240; }
+    }
+
+    .section {
+      position: relative;
+      padding: 0 0 var(--section-space);
+      z-index: 1;
+    }
+
+    .section-inner {
+      position: relative;
+    }
+
+    #coverage .section-inner,
+    #trust .section-inner,
+    #contact .section-inner {
+      padding: var(--section-shell-pad);
+      border-radius: 18px;
+      background: linear-gradient(180deg, rgba(15, 24, 19, 0.72), rgba(11, 18, 14, 0.62));
+      border: 1px solid rgba(164, 194, 120, 0.08);
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.08);
+      backdrop-filter: blur(6px);
+    }
+
+    .section-kicker {
+      display: inline-block;
+      margin-bottom: var(--space-sm);
+      color: var(--accent);
+      font-weight: 700;
+      font-size: 0.76rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .section-head {
+      display: grid;
+      grid-template-columns: minmax(0, 0.9fr) minmax(260px, 0.68fr);
+      gap: var(--section-head-gap);
+      align-items: end;
+      margin-bottom: var(--section-head-margin);
+    }
+
+    .section-head h2 {
+      margin: 0;
+      font-size: clamp(2rem, 3.8vw, 3.4rem);
+      line-height: 1.1em;
+      letter-spacing: -0.03em;
+    }
+
+    .section-head p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.98rem;
+    }
+
+    .story-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: var(--section-gap);
+    }
+
+    .story-card {
+      padding: var(--card-pad);
+      border-radius: 18px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+      min-height: auto;
+      display: grid;
+      align-content: start;
+      gap: var(--card-gap);
+      box-shadow: 0 14px 30px rgba(0, 0, 0, 0.08);
+    }
+
+    .story-index {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      border-radius: 999px;
+      color: #13200f;
+      background: linear-gradient(135deg, var(--accent), #e2f48e);
+      font-weight: 800;
+    }
+
+    .story-card h3 {
+      margin: 0;
+      font-size: 1.28rem;
+    }
+
+    .story-card p,
+    .story-card li,
+    .showcase-copy p,
+    .timeline-card p,
+    .contact-copy p {
+      color: var(--muted);
+    }
+
+    .story-card ul {
+      margin: 0;
+      padding-left: 1.1rem;
+    }
+
+    .showcase {
+      display: grid;
+      grid-template-columns: minmax(0, 1.02fr) minmax(320px, 0.98fr);
+      gap: var(--section-gap);
+      align-items: stretch;
+    }
+
+    .showcase-copy,
+    .showcase-stack {
+      border-radius: 18px;
+      background: linear-gradient(180deg, rgba(17, 28, 22, 0.82), rgba(13, 21, 17, 0.9));
+      border: 1px solid rgba(164, 194, 120, 0.1);
+      box-shadow: 0 16px 32px rgba(0, 0, 0, 0.08);
+    }
+
+    .showcase-copy {
+      padding: var(--card-pad-lg);
+      display: grid;
+      gap: var(--section-gap);
+      align-content: start;
+    }
+
+    .metric-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: var(--compact-gap);
+    }
+
+    .metric-block {
+      padding: var(--card-pad);
+      border-radius: 14px;
+      background: var(--surface-soft);
+      border: 1px solid var(--surface-border);
+    }
+
+    .metric-block strong {
+      display: block;
+      margin-bottom: var(--space-xs);
+      color: var(--accent-strong);
+      font-size: 1.4rem;
+    }
+
+    .metric-block span {
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .showcase-stack {
+      padding: var(--card-pad);
+      display: grid;
+      grid-template-rows: 1.1fr 0.9fr;
+      gap: var(--compact-gap);
+      overflow: hidden;
+    }
+
+    .showcase-image {
+      border-radius: 16px;
+      overflow: hidden;
+      min-height: 240px;
+      position: relative;
+      background: #101714;
+    }
+
+    .showcase-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .showcase-image::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(0,0,0,0.05), rgba(0,0,0,0.36));
+      pointer-events: none;
+    }
+
+    .data-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: var(--compact-gap);
+    }
+
+    .data-card {
+      padding: var(--card-pad);
+      border-radius: 14px;
+      background: var(--surface-soft);
+      border: 1px solid var(--surface-border);
+    }
+
+    .data-card strong {
+      display: block;
+      margin-bottom: var(--space-xs);
+      color: var(--text);
+      font-size: 1rem;
+    }
+
+    .data-card span {
+      color: var(--muted);
+      font-size: 0.88rem;
+    }
+
+    .timeline {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: var(--section-gap);
+    }
+
+    .timeline-card {
+      position: relative;
+      padding: var(--card-pad);
+      border-radius: 18px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+      box-shadow: 0 14px 28px rgba(0,0,0,0.08);
+      min-height: 220px;
+    }
+
+    .timeline-step {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 48px;
+      height: 48px;
+      padding: 0 0.85rem;
+      border-radius: 999px;
+      background: rgba(183, 223, 88, 0.12);
+      border: 1px solid rgba(183, 223, 88, 0.16);
+      color: var(--accent-strong);
+      font-weight: 800;
+      margin-bottom: var(--section-gap);
+    }
+
+    .timeline-card h3 {
+      margin: 0 0 var(--space-sm);
+      font-size: 1.18rem;
+    }
+
+    .credibility-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: var(--section-gap);
+    }
+
+    .institution-panel,
+    .experts-panel {
+      padding: var(--card-pad-lg);
+      border-radius: 18px;
+      background: linear-gradient(180deg, rgba(17, 28, 22, 0.8), rgba(13, 21, 17, 0.88));
+      border: 1px solid rgba(164, 194, 120, 0.1);
+      box-shadow: 0 16px 34px rgba(0,0,0,0.08);
+    }
+
+    .institution-list,
+    .experts-list {
+      display: grid;
+      gap: var(--compact-gap);
+      margin-top: var(--section-gap);
+    }
+
+    .institution-item,
+    .expert-item {
+      padding: var(--card-pad);
+      border-radius: 14px;
+      background: var(--surface-soft);
+      border: 1px solid var(--surface-border);
+    }
+
+    .institution-item strong,
+    .expert-item strong {
+      display: block;
+      margin-bottom: var(--space-xs);
+      font-size: 1rem;
+    }
+
+    .institution-item span,
+    .expert-item span {
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .institution-item a {
+      color: var(--accent-strong);
+    }
+
+    .contact-wrap {
+      display: grid;
+      grid-template-columns: minmax(0, 0.84fr) minmax(290px, 0.76fr);
+      gap: var(--section-gap);
+    }
+
+    .contact-copy,
+    .contact-panel {
+      padding: var(--card-pad-lg);
+      border-radius: 18px;
+      background: linear-gradient(180deg, rgba(14, 23, 18, 0.82), rgba(10, 17, 13, 0.9));
+      border: 1px solid rgba(164, 194, 120, 0.1);
+      box-shadow: 0 16px 34px rgba(0,0,0,0.08);
+    }
+
+    .contact-copy h2 {
+      margin: 0 0 1rem;
+      font-size: clamp(1.9rem, 3.8vw, 2.9rem);
+      letter-spacing: -0.03em;
+    }
+
+    .contact-actions {
+      display: flex;
+      gap: var(--compact-gap);
+      flex-wrap: wrap;
+      margin-top: var(--section-gap);
+    }
+
+    .contact-panel {
+      display: grid;
+      gap: var(--compact-gap);
+      align-content: start;
+    }
+
+    .contact-line {
+      padding: var(--card-pad);
+      border-radius: 14px;
+      background: var(--surface-soft);
+      border: 1px solid var(--surface-border);
+    }
+
+    .contact-line strong {
+      display: block;
+      margin-bottom: var(--space-xs);
+      color: var(--accent-strong);
+      font-size: 0.82rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .contact-line a,
+    .contact-line span {
+      color: var(--text);
+    }
+
+    .footer {
+      padding: 0 0 2rem;
+    }
+
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--section-gap);
+      padding-top: var(--section-gap);
+      border-top: 1px solid rgba(164, 194, 120, 0.1);
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    html[data-theme="light"] .eyebrow {
+      border-color: rgba(127, 174, 53, 0.16);
+      background: rgba(127, 174, 53, 0.08);
+      color: var(--accent-strong);
+    }
+
+    html[data-theme="light"] .header-cta {
+      background: linear-gradient(135deg, rgba(127, 174, 53, 0.13), rgba(35, 110, 255, 0.08));
+      border-color: rgba(127, 174, 53, 0.18);
+      color: var(--accent-strong);
+    }
+
+    html[data-theme="light"] .button-primary {
+      background: linear-gradient(135deg, #7fae35, #92c249);
+      color: #ffffff;
+      box-shadow: 0 18px 45px rgba(127, 174, 53, 0.2);
+    }
+
+    html[data-theme="light"] .button-secondary {
+      background: rgba(255,255,255,0.7);
+      border-color: rgba(31, 61, 132, 0.14);
+      color: var(--text);
+    }
+
+    html[data-theme="light"] .showcase-copy,
+    html[data-theme="light"] .showcase-stack,
+    html[data-theme="light"] .institution-panel,
+    html[data-theme="light"] .experts-panel,
+    html[data-theme="light"] .contact-copy,
+    html[data-theme="light"] .contact-panel {
+      background: rgba(255, 255, 255, 0.82);
+      border-color: rgba(31, 61, 132, 0.1);
+      box-shadow: none;
+    }
+
+    html[data-theme="light"] .story-card,
+    html[data-theme="light"] .timeline-card,
+    html[data-theme="light"] .meta-card {
+      background: rgba(255, 255, 255, 0.82);
+      border-color: rgba(31, 61, 132, 0.12);
+      box-shadow: 0 14px 30px rgba(25, 47, 94, 0.08);
+    }
+
+    html[data-theme="light"] .hero-meta {
+      border-top-color: rgba(31, 61, 132, 0.12);
+    }
+
+    html[data-theme="light"] .meta-card + .meta-card,
+    html[data-theme="light"] .timeline-card + .timeline-card,
+    html[data-theme="light"] .story-card {
+      border-color: rgba(31, 61, 132, 0.12);
+    }
+
+    html[data-theme="light"] #coverage .section-inner,
+    html[data-theme="light"] #trust .section-inner,
+    html[data-theme="light"] #contact .section-inner {
+      background: linear-gradient(180deg, rgba(255,255,255,0.62), rgba(248,251,246,0.82));
+      border-color: rgba(127, 174, 53, 0.08);
+      box-shadow: none;
+    }
+
+    html[data-theme="light"] .hero-panel::before {
+      background: linear-gradient(180deg, rgba(127,174,53,0.1), rgba(35,110,255,0.02) 34%, transparent 62%);
+    }
+
+    html[data-theme="light"] .badge-chip,
+    html[data-theme="light"] .panel-note {
+      background: rgba(255,255,255,0.76);
+      border-color: rgba(31, 61, 132, 0.1);
+    }
+
+    html[data-theme="light"] .strip-card,
+    html[data-theme="light"] .metric-block,
+    html[data-theme="light"] .data-card,
+    html[data-theme="light"] .institution-item,
+    html[data-theme="light"] .expert-item,
+    html[data-theme="light"] .contact-line {
+      background: rgba(247, 250, 255, 0.88);
+      border-color: rgba(31, 61, 132, 0.08);
+    }
+
+    html[data-theme="light"] .theme-toggle {
+      background: rgba(255,255,255,0.76);
+    }
+
+    html[data-theme="light"] .hero-summary,
+    html[data-theme="light"] .hero-gallery-shell {
+      background: linear-gradient(180deg, rgba(255,255,255,0.88), rgba(248,251,246,0.96));
+      border-color: rgba(31, 61, 132, 0.1);
+      box-shadow: 0 22px 54px rgba(25, 47, 94, 0.1);
+    }
+
+    html[data-theme="light"] .hero-copy {
+      background: linear-gradient(180deg, rgba(255,255,255,0.34), rgba(255,255,255,0.58));
+      border-color: rgba(255,255,255,0.5);
+      box-shadow: 0 24px 56px rgba(25, 47, 94, 0.12);
+    }
+
+    html[data-theme="light"] .hero-stat {
+      background: rgba(255,255,255,0.46);
+      border-color: rgba(255,255,255,0.56);
+      box-shadow: 0 14px 28px rgba(25, 47, 94, 0.08);
+    }
+
+    html[data-theme="light"] .hero-stat span {
+      color: var(--text);
+    }
+
+    html[data-theme="light"] .hero-float-media,
+    html[data-theme="light"] .hero-wire-core {
+      background: rgba(255,255,255,0.44);
+      border-color: rgba(255,255,255,0.58);
+      box-shadow: 0 22px 50px rgba(25, 47, 94, 0.12);
+    }
+
+    html[data-theme="light"] .hero-float-badge {
+      background: rgba(255,255,255,0.7);
+      border-color: rgba(31, 61, 132, 0.1);
+      color: var(--text);
+    }
+
+    html[data-theme="light"] .hero-summary-intro {
+      border-bottom-color: rgba(31, 61, 132, 0.1);
+    }
+
+
+    /* Consistent internal spacing for every card/panel */
+    :where(.badge-chip, .panel-note, .strip-card, .metric-block, .data-card, .timeline-card, .institution-item, .expert-item, .contact-copy, .contact-line) {
+      display: grid;
+      gap: var(--card-gap);
+      align-content: start;
+    }
+
+    :where(.meta-card, .badge-chip, .panel-note, .strip-card, .story-card, .showcase-copy, .metric-block, .data-card, .timeline-card, .institution-panel, .experts-panel, .institution-item, .expert-item, .contact-copy, .contact-panel, .contact-line) :where(h2, h3, p, ul, strong, span) {
+      margin-block: 0;
+    }
+
+    .contact-actions {
+      margin-top: 0;
+    }
+
+    .story-card ul {
+      display: grid;
+      gap: var(--space-xs);
+    }
+
+
+
+
+    /* --- Institutions orbit graphic --- */
+    .institution-orbit-panel {
+      overflow: hidden;
+      min-height: 560px;
+    }
+
+    .institution-orbit {
+      position: relative;
+      width: 100%;
+      min-height: 490px;
+      margin-top: var(--section-gap);
+      display: grid;
+      place-items: center;
+      isolation: isolate;
+    }
+
+    .institution-rings {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: min(320px, 48vw);
+      height: min(320px, 48vw);
+      border-radius: 999px;
+      transform: translate(-50%, -50%);
+      background: rgba(183, 223, 88, 0.045);
+      border: 1px solid rgba(183, 223, 88, 0.1);
+      box-shadow:
+        inset 0 0 28px rgba(183, 223, 88, 0.08),
+        0 22px 80px rgba(0, 0, 0, 0.18);
+      z-index: 1;
+    }
+
+    .institution-rings::before,
+    .institution-rings::after {
+      content: "";
+      position: absolute;
+      inset: 18%;
+      border-radius: inherit;
+      border: 1px solid rgba(183, 223, 88, 0.11);
+      background: rgba(255, 255, 255, 0.018);
+    }
+
+    .institution-rings::after {
+      inset: 36%;
+      background: rgba(183, 223, 88, 0.055);
+    }
+
+    .institution-lines {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    .institution-line-path {
+      fill: none;
+      stroke: color-mix(in srgb, var(--accent-strong) 58%, transparent);
+      stroke-width: 1.8;
+      stroke-linecap: round;
+      opacity: 0.72;
+    }
+
+    .institution-logo-core {
+      position: relative;
+      z-index: 5;
+      width: 132px;
+      height: 132px;
+      padding: 1rem;
+      display: grid;
+      place-items: center;
+      border-radius: 28px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.025));
+      border: 1px solid rgba(183, 223, 88, 0.18);
+      box-shadow:
+        0 24px 70px rgba(0, 0, 0, 0.24),
+        inset 2px 2px 10px rgba(255, 255, 255, 0.08),
+        inset -4px -4px 14px rgba(0, 0, 0, 0.28);
+    }
+
+    .institution-logo-core img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      padding: 0.7rem;
+      border-radius: 20px;
+      background: rgba(255,255,255,0.97);
+      filter: drop-shadow(0 10px 18px rgba(0,0,0,0.26));
+    }
+
+    .institution-node {
+      position: absolute;
+      z-index: 4;
+      width: min(220px, 38%);
+      min-height: 116px;
+      padding: 0.9rem;
+      display: grid;
+      gap: 0.35rem;
+      align-content: start;
+      border-radius: 18px;
+      color: var(--text);
+      background: linear-gradient(180deg, rgba(17, 28, 22, 0.96), rgba(10, 17, 13, 0.92));
+      border: 1px solid rgba(183, 223, 88, 0.16);
+      box-shadow:
+        12px 18px 34px rgba(0, 0, 0, 0.22),
+        inset 2px 2px 8px rgba(255, 255, 255, 0.06),
+        inset -3px -3px 10px rgba(0, 0, 0, 0.3);
+      transition: border-color 0.25s ease, background 0.25s ease;
+      will-change: transform;
+    }
+
+    .institution-node:hover,
+    .institution-node:focus-visible {
+      border-color: rgba(197, 231, 123, 0.46);
+      background: linear-gradient(180deg, rgba(22, 36, 28, 0.98), rgba(10, 17, 13, 0.96));
+      outline: none;
+    }
+
+    .institution-code {
+      width: fit-content;
+      padding: 0.28rem 0.52rem;
+      border-radius: 999px;
+      background: rgba(183, 223, 88, 0.12);
+      color: var(--accent-strong);
+      border: 1px solid rgba(183, 223, 88, 0.16);
+      font-size: 0.7rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      line-height: 1.1em;
+    }
+
+    .institution-node strong {
+      color: var(--text);
+      font-size: 0.94rem;
+      line-height: 1.18em;
+    }
+
+    .institution-node span:last-child {
+      color: var(--muted);
+      font-size: 0.78rem;
+      line-height: 1.34em;
+    }
+
+    .inst-l1 { top: 6%; left: 0; }
+    .inst-l2 { bottom: 6%; left: 0; }
+    .inst-r1 { top: 6%; right: 0; }
+    .inst-r2 { bottom: 6%; right: 0; }
+
+    html[data-theme="light"] .institution-rings {
+      background: rgba(127, 174, 53, 0.06);
+      border-color: rgba(127, 174, 53, 0.12);
+      box-shadow: 0 20px 56px rgba(25, 47, 94, 0.08), inset 0 0 24px rgba(127, 174, 53, 0.07);
+    }
+
+    html[data-theme="light"] .institution-logo-core,
+    html[data-theme="light"] .institution-node {
+      background: rgba(255, 255, 255, 0.88);
+      border-color: rgba(31, 61, 132, 0.1);
+      box-shadow: 0 14px 30px rgba(25, 47, 94, 0.08);
+    }
+
+    html[data-theme="light"] .institution-line-path {
+      stroke: rgba(35, 110, 255, 0.34);
+    }
+
+    /* Unified parallax system */
+    [data-parallax] {
+      --parallax-y: 0px;
+      transform: translate3d(0, var(--parallax-y), 0);
+      will-change: transform;
+    }
+
+    .hero-photo img {
+      height: 112%;
+      max-width: none;
+      transform: translate3d(0, var(--parallax-y), 0) scale(1.12);
+      transform-origin: center;
+    }
+
+    .panel-slide img,
+    .showcase-image img {
+      height: 112%;
+      max-width: none;
+      transform: translate3d(0, var(--parallax-y), 0) scale(1.08);
+      transform-origin: center;
+    }
+
+    .section[data-depth]::before {
+      content: "";
+      position: absolute;
+      top: 12%;
+      right: max(1rem, calc((100% - 1180px) / 2 - 5rem));
+      width: clamp(10rem, 20vw, 18rem);
+      height: clamp(10rem, 20vw, 18rem);
+      border-radius: 999px;
+      background: radial-gradient(circle, var(--hero-glow-a), transparent 68%);
+      filter: blur(8px);
+      opacity: 0.45;
+      pointer-events: none;
+      transform: translate3d(0, calc(var(--parallax-y, 0px) * -0.45), 0);
+      will-change: transform;
+    }
+
+    .section[data-depth]:nth-of-type(even)::before {
+      right: auto;
+      left: max(1rem, calc((100% - 1180px) / 2 - 5rem));
+      background: radial-gradient(circle, var(--hero-glow-b), transparent 68%);
+    }
+
+    .section-inner[data-parallax] {
+      transition: transform 0.08s linear;
+    }
+
+    @media (max-width: 1080px) {
+      .hero-grid,
+      .hero-gallery-head,
+      .showcase,
+      .credibility-grid,
+      .contact-wrap,
+      .section-head {
+        grid-template-columns: 1fr;
+      }
+
+      .story-grid,
+      .timeline,
+      .hero-strip {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .hero {
+        padding-top: var(--space-xl);
+      }
+
+      .hero-grid {
+        min-height: auto;
+        gap: clamp(1.25rem, 4vw, 2rem);
+      }
+
+      .hero-copy {
+        justify-items: center;
+        max-width: min(760px, 100%);
+        margin: 0 auto;
+        text-align: center;
+      }
+
+      .hero-stat-row {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .hero-float-scene {
+        justify-self: center;
+        width: min(100%, 44rem);
+        min-height: clamp(27rem, 62vw, 34rem);
+      }
+
+      .hero-gallery-shell {
+        --gallery-open: 24rem;
+      }
+
+      .gallery-project-card {
+        height: 26rem;
+      }
+
+      .gallery-project-card[active] .gallery-project-card__content {
+        padding: 1.3rem 1.45rem;
+      }
+
+      .gallery-project-card[active] .gallery-project-card__title {
+        font-size: 1.95rem;
+      }
+
+      .gallery-project-card__thumb {
+        width: 178px;
+        height: 286px;
+      }
+    }
+
+    @media (max-width: 780px) {
+      :root {
+        --content: min(100%, calc(100% - 1.25rem));
+        --space-unit: 1rem;
+        --section-space: var(--space-2xl);
+        --section-shell-pad: var(--space-md);
+        --section-gap: var(--space-md);
+        --section-head-gap: var(--space-lg);
+        --section-head-margin: var(--space-lg);
+        --card-pad: var(--space-md);
+        --card-pad-lg: var(--space-md);
+      }
+
+      .header-inner {
+        position: relative;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+      }
+
+      .brand {
+        padding: 0.28rem 0.5rem;
+      }
+
+      .brand-logo {
+        height: 34px;
+      }
+
+      .header-actions {
+        margin-left: auto;
+        gap: var(--space-sm);
+      }
+
+      .nav-toggle {
+        display: inline-grid;
+        place-items: center;
+        margin-left: auto;
+      }
+
+      .nav-toggle[aria-expanded="true"] span {
+        background: transparent;
+      }
+
+      .nav-toggle[aria-expanded="true"] span::before {
+        transform: translateY(0) rotate(45deg);
+      }
+
+      .nav-toggle[aria-expanded="true"] span::after {
+        transform: translateY(-2px) rotate(-45deg);
+      }
+
+      .nav {
+        display: flex;
+        position: absolute;
+        top: calc(100% + 0.65rem);
+        left: 0;
+        right: 0;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+        padding: 0.55rem;
+        border-radius: 18px;
+        background: rgba(10, 17, 13, 0.9);
+        border: 1px solid rgba(255,255,255,0.08);
+        box-shadow: 0 22px 54px rgba(0,0,0,0.26);
+        backdrop-filter: blur(16px);
+        transform: translateY(-12px) scale(0.98);
+        transform-origin: top center;
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+        transition: opacity 0.24s ease, transform 0.24s ease, visibility 0.24s ease;
+      }
+
+      .nav[data-open="true"] {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+        transform: translateY(0) scale(1);
+      }
+
+      .nav a {
+        width: 100%;
+        padding: 0.95rem 1rem;
+        border-radius: 12px;
+        font-size: 0.96rem;
+      }
+
+      .nav a:hover,
+      .nav a:focus-visible {
+        background: rgba(255,255,255,0.06);
+      }
+
+      .header-cta {
+        display: none;
+      }
+
+      .theme-label {
+        display: none;
+      }
+
+      .hero {
+        min-height: calc(100svh - var(--header-offset));
+        padding-top: var(--space-md);
+        padding-bottom: var(--space-xl);
+      }
+
+      .hero-grid {
+        min-height: auto;
+        gap: var(--space-lg);
+      }
+
+      .hero-copy {
+        justify-items: center;
+        max-width: none;
+        width: 100%;
+        padding: 1.25rem 1rem;
+        border-radius: 24px;
+        text-align: center;
+      }
+
+      .hero-float-scene {
+        width: 100%;
+        max-width: 26rem;
+        min-height: 25rem;
+      }
+
+      .hero-float-scene::before {
+        inset: 22% 18%;
+      }
+
+      .hero-stat-row {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 0.65rem;
+      }
+
+      .hero-stat {
+        gap: 0.34rem;
+        min-height: 5.7rem;
+        padding: 0.9rem 0.7rem 0.85rem;
+      }
+
+      .hero-float-media.is-a {
+        top: 8%;
+        left: 0;
+        width: clamp(8.2rem, 40vw, 9.5rem);
+      }
+
+      .hero-float-media.is-b {
+        top: 10%;
+        right: 0;
+        width: clamp(8.6rem, 42vw, 10rem);
+      }
+
+      .hero-float-media.is-c {
+        left: 3%;
+        bottom: 10%;
+        width: clamp(8.4rem, 41vw, 9.8rem);
+      }
+
+      .hero-float-media.is-d {
+        right: 3%;
+        bottom: 12%;
+        width: clamp(8.4rem, 41vw, 9.8rem);
+      }
+
+      .hero-float-badge {
+        left: 0.65rem;
+        right: 0.65rem;
+        bottom: 0.65rem;
+        font-size: 0.64rem;
+      }
+
+      .hero-wireframe {
+        display: block;
+        opacity: 0.56;
+      }
+
+      .eyebrow {
+        margin: 0 auto;
+        justify-content: center;
+      }
+
+      .hero h1 {
+        max-width: none;
+        width: 100%;
+        font-size: clamp(2.8rem, 12vw, 4.2rem);
+      }
+
+      .project-overview-inner,
+      .hero-summary,
+      .hero-meta,
+      .story-grid,
+      .timeline,
+      .credibility-grid,
+      .contact-wrap,
+      .hero-strip,
+      .metric-grid,
+      .data-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .panel-image {
+        min-height: 320px;
+      }
+
+      .panel-controls {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .panel-slider-nav,
+      .panel-slider-dots {
+        justify-content: center;
+      }
+
+      .panel-badge {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .badge-chip {
+        max-width: none;
+      }
+
+      .panel-note {
+        left: 1rem;
+        width: auto;
+      }
+
+      .project-overview-inner {
+        margin-top: calc(var(--space-lg) * -1);
+      }
+
+      .hero-summary,
+      .hero-gallery-shell {
+        text-align: center;
+      }
+
+      .hero-summary {
+        justify-items: center;
+      }
+
+      .hero-summary-intro h2 {
+        max-width: none;
+      }
+
+      .hero-gallery-head,
+      .hero-gallery-head > div {
+        display: grid;
+        gap: var(--compact-gap);
+        justify-items: center;
+        text-align: center;
+      }
+
+      .hero-gallery-head h2,
+      .hero-gallery-head p {
+        max-width: none;
+      }
+
+      .hero-summary .hero-actions {
+        justify-content: center;
+      }
+
+      .hero-meta {
+        grid-template-columns: 1fr;
+        width: 100%;
+      }
+
+      .hero-meta .meta-card {
+        width: 100%;
+      }
+
+      .hero-gallery-shell {
+        --gallery-closed: 100%;
+        --gallery-open: 100%;
+        --gallery-gap: 0.8rem;
+      }
+
+      .gallery-center-controls {
+        width: 100%;
+        justify-content: space-between;
+      }
+
+      .gallery-nav-btn {
+        width: 2.35rem;
+        height: 2.35rem;
+        font-size: 1.2rem;
+      }
+
+      .gallery-center-track {
+        flex-direction: column;
+        scroll-snap-type: y mandatory;
+        gap: 0.8rem;
+        padding-bottom: 0.8rem;
+      }
+
+      .gallery-project-card {
+        height: auto;
+        min-height: 84px;
+        flex: 0 0 auto;
+        width: 100%;
+        scroll-snap-align: start;
+      }
+
+      .gallery-project-card[active] {
+        min-height: 300px;
+        transform: none;
+      }
+
+      .gallery-project-card__content {
+        flex-direction: row;
+        justify-content: flex-start;
+        padding: 1rem;
+        align-items: center;
+        gap: 1rem;
+      }
+
+      .gallery-project-card__title {
+        writing-mode: horizontal-tb;
+        transform: none;
+        font-size: 1.18rem;
+        text-align: left;
+        margin-right: auto;
+      }
+
+      .gallery-project-card__thumb,
+      .gallery-project-card__desc,
+      .gallery-project-card__btn {
+        display: none;
+      }
+
+      .gallery-project-card[active] .gallery-project-card__content {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 1.35rem;
+        gap: 1rem;
+      }
+
+      .gallery-project-card[active] .gallery-project-card__content > div {
+        width: 100%;
+      }
+
+      .gallery-project-card[active] .gallery-project-card__title {
+        font-size: 1.72rem;
+        margin-top: 0;
+        margin-bottom: 0.75rem;
+      }
+
+      .gallery-project-card[active] .gallery-project-card__thumb {
+        width: 100%;
+        height: 13.5rem;
+        border-radius: 0.45rem;
+        margin-bottom: 0;
+      }
+
+      .gallery-project-card[active] .gallery-project-card__desc {
+        font-size: 0.94rem;
+        max-width: 100%;
+        margin-bottom: 0.9rem;
+      }
+
+      .gallery-project-card[active] .gallery-project-card__btn {
+        width: 100%;
+      }
+
+      .section-head,
+      .showcase-copy,
+      .showcase-stack,
+      .story-card,
+      .timeline-card,
+      .institution-panel,
+      .experts-panel,
+      .contact-copy,
+      .contact-panel,
+      .meta-card,
+      .metric-block,
+      .data-card,
+      .contact-line,
+      .strip-card,
+      .institution-item,
+      .expert-item,
+      .footer-inner {
+        text-align: center;
+      }
+
+      .section-head > div,
+      .showcase-copy,
+      .institution-panel,
+      .experts-panel,
+      .contact-copy,
+      .contact-panel {
+        display: grid;
+        gap: var(--compact-gap);
+        justify-items: center;
+      }
+
+      .section-kicker,
+      .story-index,
+      .timeline-step,
+      .meta-card,
+      .hero-panel {
+        margin-inline: auto;
+      }
+
+      .story-card ul {
+        width: min(100%, 18rem);
+        margin-inline: auto;
+        text-align: left;
+      }
+
+      .meta-card strong {
+        min-height: 0;
+      }
+
+      .meta-card {
+        align-items: center;
+      }
+
+      .contact-actions {
+        justify-content: center;
+      }
+
+      .contact-panel {
+        width: 100%;
+        justify-items: stretch;
+      }
+
+      .contact-line {
+        width: 100%;
+      }
+
+      html[data-theme="light"] .nav {
+        background: rgba(255,255,255,0.94);
+        border-color: rgba(31, 61, 132, 0.1);
+        box-shadow: 0 18px 40px rgba(25, 47, 94, 0.14);
+      }
+
+      html[data-theme="light"] .nav a:hover,
+      html[data-theme="light"] .nav a:focus-visible {
+        background: rgba(31,61,132,0.06);
+      }
+
+      .footer-inner {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+
+
+
+    @media (max-width: 1080px) {
+      .institution-orbit-panel {
+        min-height: auto;
+      }
+
+      .institution-orbit {
+        min-height: 520px;
+      }
+    }
+
+    @media (max-width: 780px) {
+      .institution-orbit {
+        min-height: auto;
+        display: grid;
+        gap: var(--compact-gap);
+        place-items: stretch;
+      }
+
+      .institution-rings,
+      .institution-lines {
+        display: none;
+      }
+
+      .institution-logo-core,
+      .institution-node {
+        position: relative;
+        top: auto;
+        right: auto;
+        bottom: auto;
+        left: auto;
+        width: 100%;
+        margin-inline: auto;
+      }
+
+      .institution-logo-core {
+        width: 150px;
+        height: 110px;
+        order: -1;
+      }
+
+      .institution-node {
+        min-height: auto;
+        text-align: center;
+        justify-items: center;
+      }
+    }
+
+
+
+    /* Story cards: image cards with numbered corner badge */
+    .story-card-showcase {
+      align-items: start;
+    }
+
+    .visual-story-card {
+      padding: 0;
+      border: 0;
+      background: transparent;
+      box-shadow: none;
+      display: block;
+      min-height: 0;
+      overflow: visible;
+      transform: translateY(0);
+      transition: transform 0.28s ease;
+    }
+
+    .visual-story-card:hover,
+    .visual-story-card:focus-within {
+      transform: translateY(-6px);
+    }
+
+    .story-card-inner {
+      position: relative;
+      width: 100%;
+      height: clamp(18.5rem, 30vw, 23rem);
+      background: var(--clr);
+      border-radius: 1.25rem;
+      border-bottom-right-radius: 0;
+      overflow: hidden;
+    }
+
+    .story-card-box {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      background: var(--bg-soft);
+      border-radius: 1.25rem;
+      overflow: hidden;
+      border: 1px solid rgba(164, 194, 120, 0.1);
+      box-shadow: 0 18px 36px rgba(0, 0, 0, 0.16);
+    }
+
+    .story-img-box {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+    }
+
+    .story-img-box::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(180deg, rgba(0, 0, 0, 0.02), rgba(0, 0, 0, 0.36)),
+        radial-gradient(circle at 24% 18%, rgba(197, 231, 123, 0.18), transparent 34%);
+      pointer-events: none;
+    }
+
+    .story-img-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transform: scale(1.04);
+      transition: transform 0.5s ease, filter 0.5s ease;
+    }
+
+    .visual-story-card:hover .story-img-box img,
+    .visual-story-card:focus-within .story-img-box img {
+      transform: scale(1.1);
+      filter: saturate(1.08) contrast(1.04);
+    }
+
+    .story-number-wrap {
+      position: absolute;
+      bottom: -0.375rem;
+      right: -0.375rem;
+      width: 6rem;
+      height: 6rem;
+      background: var(--clr);
+      border-top-left-radius: 50%;
+    }
+
+    .story-number-wrap::before {
+      position: absolute;
+      content: "";
+      bottom: 0.375rem;
+      left: -1.25rem;
+      background: transparent;
+      width: 1.25rem;
+      height: 1.25rem;
+      border-bottom-right-radius: 1.25rem;
+      box-shadow: 0.313rem 0.313rem 0 0.313rem var(--clr);
+    }
+
+    .story-number-wrap::after {
+      position: absolute;
+      content: "";
+      top: -1.25rem;
+      right: 0.375rem;
+      background: transparent;
+      width: 1.25rem;
+      height: 1.25rem;
+      border-bottom-right-radius: 1.25rem;
+      box-shadow: 0.313rem 0.313rem 0 0.313rem var(--clr);
+    }
+
+    .story-number-box {
+      position: absolute;
+      inset: 0.625rem;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg, var(--story-accent), #e2f48e);
+      color: #13200f;
+      font-size: 1.05rem;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      box-shadow: 0 14px 30px rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s ease;
+    }
+
+    .visual-story-card:hover .story-number-box,
+    .visual-story-card:focus-within .story-number-box {
+      transform: scale(1.1);
+    }
+
+    .story-content {
+      display: grid;
+      gap: var(--card-gap);
+      padding: 1rem 0.65rem 0;
+    }
+
+    .story-content h3 {
+      margin: 0;
+      font-size: clamp(1.45rem, 1.1rem + 0.9vw, 1.8rem);
+      line-height: 1.08em;
+      letter-spacing: -0.025em;
+      color: var(--text);
+      text-transform: none;
+    }
+
+    .story-content p,
+    .story-content li {
+      color: var(--muted);
+    }
+
+    .story-content p {
+      margin: 0;
+      font-size: 0.96rem;
+    }
+
+    .story-content ul {
+      margin: 0;
+      padding-left: 1.1rem;
+      display: grid;
+      gap: 0.35rem;
+    }
+
+    html[data-theme="light"] .story-card-inner {
+      --clr: #ffffff !important;
+    }
+
+    html[data-theme="light"] .story-card-box {
+      background: #ffffff;
+      border-color: rgba(31, 61, 132, 0.1);
+      box-shadow: 0 18px 42px rgba(25, 47, 94, 0.12);
+    }
+
+    html[data-theme="light"] .visual-story-card {
+      background: transparent;
+      border: 0;
+      box-shadow: none;
+    }
+
+    html[data-theme="light"] .story-number-wrap {
+      background: #ffffff;
+    }
+
+    html[data-theme="light"] .story-number-wrap::before,
+    html[data-theme="light"] .story-number-wrap::after {
+      box-shadow: 0.313rem 0.313rem 0 0.313rem #ffffff;
+    }
+
+    @media (max-width: 780px) {
+      .story-card-showcase {
+        justify-items: stretch;
+      }
+
+      .visual-story-card {
+        width: 100%;
+        max-width: none;
+      }
+
+      .story-content {
+        justify-items: center;
+        text-align: center;
+        padding-inline: 0.75rem;
+      }
+
+      .story-content ul {
+        width: min(100%, 18rem);
+        margin-inline: auto;
+        text-align: left;
+        margin-bottom: 5%;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      *,
+      *::before,
+      *::after {
+        animation: none !important;
+        transition: none !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <header class="site-header">
+      <div class="header-inner">
+        <a class="brand" href="#top" aria-label="PEST PRO naslovnica">
+          <img class="brand-logo" src="cropped-PESTPRO.png" alt="PEST PRO logo">
+     
+        </a>
+
+        <nav class="nav" id="siteNav" data-open="false">
+          <a href="#story" id="navStory">Prica</a>
+          <a href="#coverage" id="navCoverage">Pokusi</a>
+          <a href="#flow" id="navFlow">Proces</a>
+          <a href="#trust" id="navTrust">Suradnja</a>
+          <a href="#contact" id="navContact">Kontakt</a>
+        </nav>
+
+        <div class="header-actions">
+          <select class="language-select" id="languageSelect" aria-label="Odabir jezika">
+            <option value="hr">HR</option>
+            <option value="en">EN</option>
+            <option value="de">DE</option>
+          </select>
+
+          <button class="theme-toggle" id="themeToggle" type="button" aria-label="Promijeni temu">
+            <span class="theme-toggle-track" aria-hidden="true">
+              <span class="theme-toggle-thumb"></span>
+            </span>
+            <span class="theme-label" id="themeLabel">Dark</span>
+          </button>
+
+          <a class="header-cta" href="#contact" id="headerCta">Dogovorite sastanak</a>
+
+          <button class="nav-toggle" id="navToggle" aria-label="Otvori navigaciju" aria-expanded="false" aria-controls="siteNav">
+            <span></span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main id="top">
+      <section class="hero" id="heroStage">
+        <div class="hero-photo" aria-hidden="true">
+          <img src="https://images.unsplash.com/photo-1501004318641-b39e6451bec6?auto=format&amp;fit=crop&amp;w=1800&amp;q=80" alt="" data-parallax data-parallax-speed="-0.12">
+        </div>
+        <canvas id="hero-canvas" aria-hidden="true" data-parallax data-parallax-speed="-0.05"></canvas>
+
+        <div class="hero-grid">
+          <div class="hero-copy" id="heroCopy" data-parallax data-parallax-speed="0.045">
+            <span class="eyebrow" id="heroEyebrow">Safe crop - Safe world</span>
+            <h1 id="heroTitle">Garancija kvalitetnih <span class="accent">poljskih pokusa.</span></h1>
+            <div class="hero-stat-row">
+              <div class="hero-stat">
+                <strong id="strip1Title">2015</strong>
+                <span id="strip1Body">Tvrtka osnovana u Zagrebu</span>
+              </div>
+              <div class="hero-stat">
+                <strong id="strip2Title">10+</strong>
+                <span id="strip2Body">Agronoma i tehnickih suradnika</span>
+              </div>
+              <div class="hero-stat">
+                <strong id="strip3Title">ARM</strong>
+                <span id="strip3Body">Certificirano izvjestavanje</span>
+              </div>
+              <div class="hero-stat">
+                <strong id="strip4Title">Hrvatska</strong>
+                <span id="strip4Body">Nacionalna pokrivenost pokusima</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="hero-float-scene" aria-hidden="true">
+            <svg class="hero-wireframe" viewBox="0 0 1200 720" preserveAspectRatio="none">
+              <path d="M 600 340 C 500 270, 390 215, 255 165" />
+              <path d="M 600 340 C 705 275, 820 225, 955 185" />
+              <path d="M 600 340 C 505 418, 400 500, 295 560" />
+              <path d="M 600 340 C 702 425, 812 505, 930 585" />
+            </svg>
+            <div class="hero-wire-core"></div>
+            <figure class="hero-float-media is-a">
+              <img src="https://images.unsplash.com/photo-1500937386664-56d1dfef3854?auto=format&amp;fit=crop&amp;w=900&amp;q=80" alt="">
+              <span class="hero-float-badge">Poljski pokus</span>
+            </figure>
+            <figure class="hero-float-media is-b">
+              <img src="https://images.unsplash.com/photo-1464226184884-fa280b87c399?auto=format&amp;fit=crop&amp;w=900&amp;q=80" alt="">
+              <span class="hero-float-badge">Lokaliteti</span>
+            </figure>
+            <figure class="hero-float-media is-c">
+              <img src="https://images.unsplash.com/photo-1501004318641-b39e6451bec6?auto=format&amp;fit=crop&amp;w=900&amp;q=80" alt="">
+              <span class="hero-float-badge">Usjevi</span>
+            </figure>
+            <figure class="hero-float-media is-d">
+              <img src="https://images.unsplash.com/photo-1461354464878-ad92f492a5a0?auto=format&amp;fit=crop&amp;w=900&amp;q=80" alt="">
+              <span class="hero-float-badge">Ocjenjivanje</span>
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      <section class="project-overview" id="projectOverview">
+        <div class="project-overview-inner">
+          <div class="hero-summary" id="heroSummary">
+            <div class="hero-summary-intro">
+              <span class="section-kicker" id="heroOverviewKicker">O nama</span>
+              <h2 id="heroOverviewTitle">Specijalizirani partner za registraciju sredstava za zastitu bilja i provedbu poljskih pokusa u Hrvatskoj.</h2>
+            </div>
+
+            <div class="hero-summary-body">
+              <p class="hero-lead" id="heroLead">
+                PEST PRO okuplja agronome i tehnicke suradnike s iskustvom u ispitivanju ucinkovitosti i registraciji sredstava za zastitu bilja u Hrvatskoj. Tvrtka osigurava potrebnu opremu, parcele, vinograde i vocnjake kroz suradnju s lokalnim poljoprivrednicima diljem Hrvatske, cime pokriva jugoistocnu i mediteransku EPPO klimatsku zonu.
+              </p>
+
+              <div class="hero-actions">
+                <a class="button button-primary" href="#contact" id="heroPrimaryCta">Dogovorite razgovor</a>
+                <a class="button button-secondary" href="#coverage" id="heroSecondaryCta">Pregled usluga</a>
+              </div>
+
+              <div class="hero-meta">
+                <div class="meta-card">
+                  <strong id="heroMeta1Title">Dvije EPPO zone</strong>
+                  <span id="heroMeta1Body">Jugoistocna i mediteranska zona pokrivene su kroz mrezu parcela, vinograda i vocnjaka u Hrvatskoj.</span>
+                </div>
+                <div class="meta-card">
+                  <strong id="heroMeta2Title">Strucnjaci na terenu</strong>
+                  <span id="heroMeta2Body">Agronomi i tehnicki suradnici vode provedbu pokusa, pracenje rezultata i komunikaciju tijekom projekta.</span>
+                </div>
+                <div class="meta-card">
+                  <strong id="heroMeta3Title">Brzi odgovor i rokovi</strong>
+                  <span id="heroMeta3Body">Partneri dobivaju brzo postavljanje probnih pokusa, razmjenu podataka i postivanje unaprijed dogovorenih rokova.</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="hero-gallery" id="heroGallery">
+        <div class="hero-gallery-inner">
+          <div class="hero-gallery-head">
+            <div>
+              <span class="section-kicker" id="heroGalleryKicker">Usluge i pokusi</span>
+              <h2 id="heroGalleryTitle">Poljski pokusi i ispitivanja ucinkovitosti za sirok raspon sredstava za zastitu bilja u Hrvatskoj.</h2>
+            </div>
+            <p id="heroGalleryLead">Poljski pokusi provode se prema GEP i EPPO standardima, a finalna izvjesca izraduju se u certificiranom ARM sustavu ili u formatu prilagodenom potrebama poslovnog partnera.</p>
+          </div>
+
+          <div class="hero-gallery-shell">
+            <div class="gallery-center-controls">
+              <button class="gallery-nav-btn" id="galleryPrev" type="button" aria-label="Prethodna kartica">‹</button>
+              <button class="gallery-nav-btn" id="galleryNext" type="button" aria-label="Sljedeca kartica">›</button>
+            </div>
+
+            <div class="gallery-center-slider">
+              <div class="gallery-center-track" id="galleryTrack">
+                <article class="gallery-project-card" active>
+                  <img class="gallery-project-card__bg" src="https://images.unsplash.com/photo-1464226184884-fa280b87c399?auto=format&amp;fit=crop&amp;w=1400&amp;q=80" alt="">
+                  <div class="gallery-project-card__content">
+                    <img class="gallery-project-card__thumb" src="https://images.unsplash.com/photo-1500937386664-56d1dfef3854?auto=format&amp;fit=crop&amp;w=640&amp;q=80" alt="">
+                    <div>
+                      <h3 class="gallery-project-card__title" id="galleryCard1Title">Lokaliteti</h3>
+                      <p class="gallery-project-card__desc" id="galleryCard1Desc">Mreza parcela, vinograda i vocnjaka rasporedena prema klimatskoj zoni i cilju pokusa.</p>
+                      <span class="gallery-project-card__btn" id="galleryCard1Cta">Detalji</span>
+                    </div>
+                  </div>
+                </article>
+
+                <article class="gallery-project-card">
+                  <img class="gallery-project-card__bg" src="https://images.unsplash.com/photo-1501004318641-b39e6451bec6?auto=format&amp;fit=crop&amp;w=1400&amp;q=80" alt="">
+                  <div class="gallery-project-card__content">
+                    <img class="gallery-project-card__thumb" src="https://images.unsplash.com/photo-1464226184884-fa280b87c399?auto=format&amp;fit=crop&amp;w=640&amp;q=80" alt="">
+                    <div>
+                      <h3 class="gallery-project-card__title" id="galleryCard2Title">Kulture</h3>
+                      <p class="gallery-project-card__desc" id="galleryCard2Desc">Ratarstvo, vinogradarstvo, vocarstvo i povrcarstvo za razlicite kategorije sredstava za zastitu bilja.</p>
+                      <span class="gallery-project-card__btn" id="galleryCard2Cta">Detalji</span>
+                    </div>
+                  </div>
+                </article>
+
+                <article class="gallery-project-card">
+                  <img class="gallery-project-card__bg" src="https://images.unsplash.com/photo-1461354464878-ad92f492a5a0?auto=format&amp;fit=crop&amp;w=1400&amp;q=80" alt="">
+                  <div class="gallery-project-card__content">
+                    <img class="gallery-project-card__thumb" src="https://images.unsplash.com/photo-1501004318641-b39e6451bec6?auto=format&amp;fit=crop&amp;w=640&amp;q=80" alt="">
+                    <div>
+                      <h3 class="gallery-project-card__title" id="galleryCard3Title">Projektni fokus</h3>
+                      <p class="gallery-project-card__desc" id="galleryCard3Desc">Relevantan lokalitet, kontroliran pokus i izvjestaj spreman za evaluaciju, registraciju i poslovne odluke.</p>
+                      <span class="gallery-project-card__btn" id="galleryCard3Cta">Detalji</span>
+                    </div>
+                  </div>
+                </article>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="story" data-depth data-parallax data-parallax-speed="0.018">
+        <div class="section-inner" data-parallax data-parallax-speed="0.035">
+          <div class="section-head">
+            <div>
+              <span class="section-kicker" id="storyKicker">Strucna podrska</span>
+              <h2 id="storyTitle">Terenski kapacitet, regulatorna disciplina i izvjestavanje u istom procesu.</h2>
+            </div>
+            <p id="storyLead">
+              PEST PRO okuplja agronomske strucnjake, lokalitete za pokuse i sustav izvjestavanja potreban za kvalitetnu provedbu istrazivanja. Cilj je jasan: precizno voditi pokus i isporuciti rezultat koji ima poslovnu i regulatornu vrijednost.
+            </p>
+          </div>
+
+          <div class="story-grid story-card-showcase">
+            <article class="story-card visual-story-card">
+              <div class="story-card-inner" style="--clr: var(--bg-soft); --story-accent: #88b83f;">
+                <div class="story-card-box">
+                  <div class="story-img-box">
+                    <img src="https://images.unsplash.com/photo-1500937386664-56d1dfef3854?auto=format&amp;fit=crop&amp;w=900&amp;q=80" alt="Poljski pokus na obradenoj parceli">
+                  </div>
+                  <div class="story-number-wrap" aria-hidden="true">
+                    <span class="story-number-box">01</span>
+                  </div>
+                </div>
+              </div>
+              <div class="story-content">
+                <h3 id="storyCard1Title">Opseg usluga</h3>
+                <p id="storyCard1Body">Poljski pokusi i ispitivanja ucinkovitosti za razlicite kategorije sredstava za zastitu bilja u Hrvatskoj.</p>
+                <ul>
+                  <li id="storyCard1Item1">fungicidi</li>
+                  <li id="storyCard1Item2">herbicidi</li>
+                  <li id="storyCard1Item3">insekticidi i akaricidi</li>
+                  <li id="storyCard1Item4">regulatori rasta i biostimulatori</li>
+                </ul>
+              </div>
+            </article>
+
+            <article class="story-card visual-story-card">
+              <div class="story-card-inner" style="--clr: var(--bg-soft); --story-accent: #28bd86;">
+                <div class="story-card-box">
+                  <div class="story-img-box">
+                    <img src="https://images.unsplash.com/photo-1464226184884-fa280b87c399?auto=format&amp;fit=crop&amp;w=900&amp;q=80" alt="Poljoprivredne parcele i lokaliteti za pokuse">
+                  </div>
+                  <div class="story-number-wrap" aria-hidden="true">
+                    <span class="story-number-box">02</span>
+                  </div>
+                </div>
+              </div>
+              <div class="story-content">
+                <h3 id="storyCard2Title">Standard rada</h3>
+                <p id="storyCard2Body">Pokusi se oslanjaju na teren, standarde i dokumentaciju koja podrzava stvarno donosenje odluka.</p>
+                <ul>
+                  <li id="storyCard2Item1">GEP i EPPO uskladenost</li>
+                  <li id="storyCard2Item2">ARM finalna izvjesca</li>
+                  <li id="storyCard2Item3">institucionalna suradnja</li>
+                  <li id="storyCard2Item4">lokalni agronomski strucnjaci</li>
+                </ul>
+              </div>
+            </article>
+
+            <article class="story-card visual-story-card">
+              <div class="story-card-inner" style="--clr: var(--bg-soft); --story-accent: #c5e77b;">
+                <div class="story-card-box">
+                  <div class="story-img-box">
+                    <img src="https://images.unsplash.com/photo-1501004318641-b39e6451bec6?auto=format&amp;fit=crop&amp;w=900&amp;q=80" alt="Zelena kultura u polju tijekom pracenja pokusa">
+                  </div>
+                  <div class="story-number-wrap" aria-hidden="true">
+                    <span class="story-number-box">03</span>
+                  </div>
+                </div>
+              </div>
+              <div class="story-content">
+                <h3 id="storyCard3Title">Za partnera to znaci</h3>
+                <p id="storyCard3Body">Jedna kontaktna tocka za planiranje pokusa, provedbu na relevantnim lokalitetima i zavrsno izvjestavanje spremno za internu evaluaciju i registraciju.</p>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="coverage" data-depth data-parallax data-parallax-speed="0.018">
+        <div class="section-inner" data-parallax data-parallax-speed="0.035">
+          <div class="section-head">
+            <div>
+              <span class="section-kicker" id="coverageKicker">Pokrivenost i podaci</span>
+              <h2 id="coverageTitle">Terenski kapacitet gradi se na lokacijama, kulturama i ritmu izvjestavanja.</h2>
+            </div>
+            <p id="coverageLead">
+              Pokus ima vrijednost samo kada je lokalitet dobro odabran, provedba dosljedna, a podaci zabiljezeni tako da ostanu korisni i nakon terenskog dijela projekta.
+            </p>
+          </div>
+
+          <div class="showcase">
+            <div class="showcase-copy">
+              <span class="section-kicker" id="coverageModelKicker">Operativni model</span>
+              <p id="coverageModelBody">
+                PEST PRO osigurava potrebnu opremu, parcele, vinograde i vocnjake kroz ugovore s lokalnim poljoprivrednicima diljem Hrvatske. Projekt pocinje pripremom i odabirom uvjeta koji odgovaraju cilju ispitivanja.
+              </p>
+
+              <div class="metric-grid">
+                <div class="metric-block">
+                  <strong id="metric1Title">Jugoistok</strong>
+                  <span id="metric1Body">Pokusi u kontinentalnim uvjetima za kulture i scenarije koji traze drugaciji pritisak bolesti i korova.</span>
+                </div>
+                <div class="metric-block">
+                  <strong id="metric2Title">Mediteran</strong>
+                  <span id="metric2Body">Prisutnost u vinogradarskim, vocarskim i povrtnim kulturama s mediteranskim klimatskim signalima.</span>
+                </div>
+                <div class="metric-block">
+                  <strong id="metric3Title">Ucinci</strong>
+                  <span id="metric3Body">Efikasnost, selektivnost, fitotoksicnost i ucinci na promatrani i susjedni usjev.</span>
+                </div>
+                <div class="metric-block">
+                  <strong id="metric4Title">Dosjei</strong>
+                  <span id="metric4Body">Bioloska procjena i zavrsni dokumenti prilagodeni zahtjevima partnera i postupka registracije.</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="showcase-stack">
+              <div class="showcase-image">
+                <img src="https://images.unsplash.com/photo-1464226184884-fa280b87c399?auto=format&amp;fit=crop&amp;w=1200&amp;q=80" alt="Pogled na poljoprivredne parcele iz zraka" data-parallax data-parallax-speed="-0.05">
+              </div>
+              <div class="data-grid">
+                <div class="data-card">
+                  <strong id="data1Title">ARM sustav</strong>
+                  <span id="data1Body">Certificirani tok izrade finalnog izvjestaja i razmjene podataka s partnerom.</span>
+                </div>
+                <div class="data-card">
+                  <strong id="data2Title">Brzi odgovor</strong>
+                  <span id="data2Body">Postavljanje pokusa i povrat informacija tijekom cijelog trajanja projekta.</span>
+                </div>
+                <div class="data-card">
+                  <strong id="data3Title">Stvarna polja</strong>
+                  <span id="data3Body">Ne simulacija, nego pokusi u produkcijskom i lokalno relevantnom okruzenju.</span>
+                </div>
+                <div class="data-card">
+                  <strong id="data4Title">Kontrola rokova</strong>
+                  <span id="data4Body">Jasni dogovori, privremena izvjesca i zavrsna isporuka bez gubljenja konteksta.</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="flow" data-depth data-parallax data-parallax-speed="0.018">
+        <div class="section-inner" data-parallax data-parallax-speed="0.035">
+          <div class="section-head">
+            <div>
+              <span class="section-kicker" id="flowKicker">Tok projekta</span>
+              <h2 id="flowTitle">Od zahtjeva za pokus do zavrsnog izvjestaja bez praznog hoda.</h2>
+            </div>
+            <p id="flowLead">
+              Svaka faza ima jasnu svrhu: definirati pokus, provesti ga u odgovarajucim uvjetima i pretvoriti rezultate u dokumentaciju spremnu za daljnju uporabu.
+            </p>
+          </div>
+
+          <div class="timeline">
+            <article class="timeline-card">
+              <span class="timeline-step">01</span>
+              <h3 id="flowStep1Title">Definicija pokusa</h3>
+              <p id="flowStep1Body">Uskladivanje kulture, aktivne tvari, ciljanih stetnih organizama i trazenog regulatornog ishoda.</p>
+            </article>
+
+            <article class="timeline-card">
+              <span class="timeline-step">02</span>
+              <h3 id="flowStep2Title">Odabir lokaliteta</h3>
+              <p id="flowStep2Body">Parcele, vinogradi i vocnjaci biraju se prema klimatskoj zoni, agronomskom kontekstu i trazenim uvjetima.</p>
+            </article>
+
+            <article class="timeline-card">
+              <span class="timeline-step">03</span>
+              <h3 id="flowStep3Title">Provedba i pracenje</h3>
+              <p id="flowStep3Body">Terenski tim vodi pokus, biljezi rezultate i komunicira s partnerom tijekom kljucnih faza promatranja.</p>
+            </article>
+
+            <article class="timeline-card">
+              <span class="timeline-step">04</span>
+              <h3 id="flowStep4Title">ARM izvjesce</h3>
+              <p id="flowStep4Body">Privremena i zavrsna izvjesca strukturiraju podatke tako da budu spremni za internu evaluaciju i registraciju.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="trust" data-depth data-parallax data-parallax-speed="0.018">
+        <div class="section-inner" data-parallax data-parallax-speed="0.035">
+          <div class="section-head">
+            <div>
+              <span class="section-kicker" id="trustKicker">Suradnja i ekspertiza</span>
+              <h2 id="trustTitle">Kredibilitet dolazi iz institucija, ali i iz ljudi koji znaju sto gledaju na terenu.</h2>
+            </div>
+            <p id="trustLead">
+              Institucionalna suradnja i iskustvo strucnih suradnika daju dodatnu sigurnost u planiranju, provedbi i tumacenju rezultata poljskih pokusa.
+            </p>
+          </div>
+
+          <div class="credibility-grid">
+            <div class="institution-panel institution-orbit-panel">
+              <span class="section-kicker" id="institutionsKicker">Institucije</span>
+
+              <div class="institution-orbit" aria-label="Institucionalna mreza PEST PRO">
+                <div class="institution-rings gsap-trust-scale" aria-hidden="true"></div>
+
+                <svg class="institution-lines" viewBox="0 0 800 450" aria-hidden="true">
+                  <path class="institution-line-path" d="M 400 225 C 275 215, 235 105, 170 105" />
+                  <path class="institution-line-path" d="M 400 225 C 275 235, 235 345, 170 345" />
+                  <path class="institution-line-path" d="M 400 225 C 525 215, 565 105, 630 105" />
+                  <path class="institution-line-path" d="M 400 225 C 525 235, 565 345, 630 345" />
+                </svg>
+
+                <div class="institution-logo-core gsap-trust-pop float-trust-slow">
+                  <img src="cropped-PESTPRO.png" alt="PEST PRO logo">
+                </div>
+
+                <a class="institution-node inst-l1 float-trust" href="https://www.agr.unizg.hr/" target="_blank" rel="noopener">
+                  <span class="institution-code">AGR</span>
+                  <strong>Agronomski fakultet u Zagrebu</strong>
+                  <span id="institution1Body">Klasicni akademski autoritet za agronomiju i prirodni partner za vjerodostojnost istrazivanja.</span>
+                </a>
+
+                <a class="institution-node inst-l2 float-trust-alt" href="https://www.fazos.unios.hr/" target="_blank" rel="noopener">
+                  <span class="institution-code">FAZOS</span>
+                  <strong>Fakultet agrobiotehnickih znanosti Osijek</strong>
+                  <span id="institution2Body">Relevantan za kontinentalne kulture, operativnu suradnju i strucnu razmjenu.</span>
+                </a>
+
+                <a class="institution-node inst-r1 float-trust-alt" href="https://www.iptpo.hr/" target="_blank" rel="noopener">
+                  <span class="institution-code">IPTPO</span>
+                  <strong>Institut za poljoprivredu i turizam u Porecu</strong>
+                  <span id="institution3Body">Klucan dio mediteranskog i jadranskog agronomskog konteksta.</span>
+                </a>
+
+                <a class="institution-node inst-r2 float-trust" href="https://www.poljinos.hr/" target="_blank" rel="noopener">
+                  <span class="institution-code">PIO</span>
+                  <strong>Poljoprivredni institut Osijek</strong>
+                  <span id="institution4Body">Dodatna institucionalna tezina za pokuse i kulturoloski relevantne uvjete.</span>
+                </a>
+              </div>
+            </div>
+
+            <div class="experts-panel">
+              <span class="section-kicker" id="expertsKicker">Suradnici</span>
+              <div class="experts-list">
+                <div class="expert-item">
+                  <strong>Ljiljana Malic</strong>
+                  <span id="expert1Role">Suradnik za ratarstvo</span>
+                </div>
+                <div class="expert-item">
+                  <strong>Kresimir Kralj</strong>
+                  <span id="expert2Role">Suradnik za vinogradarstvo</span>
+                </div>
+                <div class="expert-item">
+                  <strong>Mladen Dobranic</strong>
+                  <span id="expert3Role">Suradnik za vocarstvo</span>
+                </div>
+                <div class="expert-item">
+                  <strong>Sasa Zovko</strong>
+                  <span id="expert4Role">Suradnik za mediteranske i povrcarske kulture</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="contact" data-depth data-parallax data-parallax-speed="0.018">
+        <div class="section-inner" data-parallax data-parallax-speed="0.035">
+          <div class="contact-wrap">
+            <div class="contact-copy">
+              <span class="section-kicker" id="contactKicker">Sljedeci korak</span>
+              <h2 id="contactTitle">Ako trebate pouzdan pokus i izvjestaj spreman za regulatorni postupak, vrijeme je za razgovor.</h2>
+              <p id="contactLead">
+                Javite nam osnovne zahtjeve projekta i zajedno cemo odrediti opseg pokusa, odgovarajuce lokalitete i model izvjestavanja koji najbolje odgovara vasem postupku.
+              </p>
+              <div class="contact-actions">
+                <a class="button button-primary" href="tel:+385998456776" id="contactPrimaryCta">Nazovite +385 99 845 6776</a>
+                <a class="button button-secondary" href="mailto:marinela.hrupec@pestpro.hr" id="contactSecondaryCta">Posaljite email</a>
+              </div>
+            </div>
+
+            <aside class="contact-panel">
+              <div class="contact-line">
+                <strong id="contactLine1Title">Tvrtka</strong>
+                <span>PEST PRO d.o.o.</span>
+              </div>
+              <div class="contact-line">
+                <strong id="contactLine2Title">Izvrsni direktor</strong>
+                <span>Ivan Havaic</span>
+              </div>
+              <div class="contact-line">
+                <strong id="contactLine3Title">Email</strong>
+                <a href="mailto:marinela.hrupec@pestpro.hr">marinela.hrupec@pestpro.hr</a>
+              </div>
+              <div class="contact-line">
+                <strong id="contactLine4Title">Telefon</strong>
+                <a href="tel:+385998456776">+385 99 845 6776</a>
+              </div>
+              <div class="contact-line">
+                <strong id="contactLine5Title">Adresa</strong>
+                <span>Ducanska 1, Sigetec Ludbreski 42230 Ludbreg</span>
+              </div>
+            </aside>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        <span id="footerText">PEST PRO d.o.o. · Poljski pokusi, ispitivanje ucinkovitosti i regulatorna dokumentacija</span>
+        <span id="footerCopyright">&copy; 2026 PestPro</span>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    const root = document.documentElement;
+    const navToggle = document.getElementById("navToggle");
+    const siteNav = document.getElementById("siteNav");
+    const languageSelect = document.getElementById("languageSelect");
+    const themeToggle = document.getElementById("themeToggle");
+    const themeLabel = document.getElementById("themeLabel");
+    const canvas = document.getElementById("hero-canvas");
+    const ctx = canvas.getContext("2d");
+    const systemLight = window.matchMedia("(prefers-color-scheme: light)");
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const parallaxItems = Array.from(document.querySelectorAll("[data-parallax]"));
+    const galleryTrack = document.getElementById("galleryTrack");
+    const galleryCards = galleryTrack ? Array.from(galleryTrack.children) : [];
+    const galleryPrev = document.getElementById("galleryPrev");
+    const galleryNext = document.getElementById("galleryNext");
+    const heroCopy = document.getElementById("heroCopy");
+    const heroEyebrow = document.getElementById("heroEyebrow");
+    const heroTitle = document.getElementById("heroTitle");
+    const heroLead = document.getElementById("heroLead");
+    const heroMeta1Title = document.getElementById("heroMeta1Title");
+    const heroMeta1Body = document.getElementById("heroMeta1Body");
+    const heroMeta2Title = document.getElementById("heroMeta2Title");
+    const heroMeta2Body = document.getElementById("heroMeta2Body");
+    const heroMeta3Title = document.getElementById("heroMeta3Title");
+    const heroMeta3Body = document.getElementById("heroMeta3Body");
+    let currentLanguage = "hr";
+    const themeWords = {
+      hr: { dark: "Tamno", light: "Svijetlo" },
+      en: { dark: "Dark", light: "Light" },
+      de: { dark: "Dunkel", light: "Hell" }
+    };
+    const staticHeroCopy = {
+      hr: {
+        eyebrow: "Safe crop - Safe world",
+        title: "Garancija kvalitetnih <span class=\"accent\">poljskih pokusa.</span>"
+      },
+      en: {
+        eyebrow: "Safe crop - Safe world",
+        title: "Guaranteed quality of <span class=\"accent\">field trials.</span>"
+      },
+      de: {
+        eyebrow: "Safe crop - Safe world",
+        title: "Garantie fuer hochwertige <span class=\"accent\">Feldversuche.</span>"
+      }
+    };
+    const translations = {
+      hr: {
+        brandSubtitle: "Poljski pokusi i registracija sredstava",
+        navStory: "Prica",
+        navCoverage: "Pokusi",
+        navFlow: "Proces",
+        navTrust: "Suradnja",
+        navContact: "Kontakt",
+        headerCta: "Dogovorite sastanak",
+        heroOverviewKicker: "O nama",
+        heroOverviewTitle: "Specijalizirani partner za registraciju sredstava za zastitu bilja i provedbu poljskih pokusa u Hrvatskoj.",
+        heroLead: "PEST PRO okuplja agronome i tehnicke suradnike s iskustvom u ispitivanju ucinkovitosti i registraciji sredstava za zastitu bilja u Hrvatskoj. Tvrtka osigurava potrebnu opremu, parcele, vinograde i vocnjake kroz suradnju s lokalnim poljoprivrednicima diljem Hrvatske, cime pokriva jugoistocnu i mediteransku EPPO klimatsku zonu.",
+        heroMeta1Title: "Dvije EPPO zone",
+        heroMeta1Body: "Jugoistocna i mediteranska zona pokrivene su kroz mrezu parcela, vinograda i vocnjaka u Hrvatskoj.",
+        heroMeta2Title: "Strucnjaci na terenu",
+        heroMeta2Body: "Agronomi i tehnicki suradnici vode provedbu pokusa, pracenje rezultata i komunikaciju tijekom projekta.",
+        heroMeta3Title: "Brzi odgovor i rokovi",
+        heroMeta3Body: "Partneri dobivaju brzo postavljanje probnih pokusa, razmjenu podataka i postivanje unaprijed dogovorenih rokova.",
+        heroGalleryKicker: "Usluge i pokusi",
+        heroGalleryTitle: "Poljski pokusi i ispitivanja ucinkovitosti za sirok raspon sredstava za zastitu bilja u Hrvatskoj.",
+        heroGalleryLead: "Poljski pokusi provode se prema GEP i EPPO standardima, a finalna izvjesca izraduju se u certificiranom ARM sustavu ili u formatu prilagodenom potrebama poslovnog partnera.",
+        galleryCard1Title: "Lokaliteti",
+        galleryCard1Desc: "Mreza parcela, vinograda i vocnjaka rasporedena prema klimatskoj zoni i cilju pokusa.",
+        galleryCard1Cta: "Detalji",
+        galleryCard2Title: "Kulture",
+        galleryCard2Desc: "Ratarstvo, vinogradarstvo, vocarstvo i povrcarstvo za razlicite kategorije sredstava za zastitu bilja.",
+        galleryCard2Cta: "Detalji",
+        galleryCard3Title: "Projektni fokus",
+        galleryCard3Desc: "Relevantan lokalitet, kontroliran pokus i izvjestaj spreman za evaluaciju, registraciju i poslovne odluke.",
+        galleryCard3Cta: "Detalji",
+        heroPrimaryCta: "Dogovorite razgovor",
+        heroSecondaryCta: "Pregled usluga",
+        strip1Title: "2015",
+        strip1Body: "Tvrtka osnovana u Zagrebu",
+        strip2Title: "10+",
+        strip2Body: "Agronoma i tehnickih suradnika",
+        strip3Title: "ARM",
+        strip3Body: "Certificirano izvjestavanje",
+        strip4Title: "Hrvatska",
+        strip4Body: "Nacionalna pokrivenost pokusima",
+        storyKicker: "Strucna podrska",
+        storyTitle: "Terenski kapacitet, regulatorna disciplina i izvjestavanje u istom procesu.",
+        storyLead: "PEST PRO okuplja agronomske strucnjake, lokalitete za pokuse i sustav izvjestavanja potreban za kvalitetnu provedbu istrazivanja. Cilj je jasan: precizno voditi pokus i isporuciti rezultat koji ima poslovnu i regulatornu vrijednost.",
+        storyCard1Title: "Opseg usluga",
+        storyCard1Body: "Poljski pokusi i ispitivanja ucinkovitosti za razlicite kategorije sredstava za zastitu bilja u Hrvatskoj.",
+        storyCard1Item1: "fungicidi",
+        storyCard1Item2: "herbicidi",
+        storyCard1Item3: "insekticidi i akaricidi",
+        storyCard1Item4: "regulatori rasta i biostimulatori",
+        storyCard2Title: "Standard rada",
+        storyCard2Body: "Pokusi se oslanjaju na teren, standarde i dokumentaciju koja podrzava stvarno donosenje odluka.",
+        storyCard2Item1: "GEP i EPPO uskladenost",
+        storyCard2Item2: "ARM finalna izvjesca",
+        storyCard2Item3: "institucionalna suradnja",
+        storyCard2Item4: "lokalni agronomski strucnjaci",
+        storyCard3Title: "Za partnera to znaci",
+        storyCard3Body: "Jedna kontaktna tocka za planiranje pokusa, provedbu na relevantnim lokalitetima i zavrsno izvjestavanje spremno za internu evaluaciju i registraciju.",
+        coverageKicker: "Pokrivenost i podaci",
+        coverageTitle: "Terenski kapacitet gradi se na lokacijama, kulturama i ritmu izvjestavanja.",
+        coverageLead: "Pokus ima vrijednost samo kada je lokalitet dobro odabran, provedba dosljedna, a podaci zabiljezeni tako da ostanu korisni i nakon terenskog dijela projekta.",
+        coverageModelKicker: "Operativni model",
+        coverageModelBody: "PEST PRO osigurava potrebnu opremu, parcele, vinograde i vocnjake kroz ugovore s lokalnim poljoprivrednicima diljem Hrvatske. Projekt pocinje pripremom i odabirom uvjeta koji odgovaraju cilju ispitivanja.",
+        metric1Title: "Jugoistok",
+        metric1Body: "Pokusi u kontinentalnim uvjetima za kulture i scenarije koji traze drugaciji pritisak bolesti i korova.",
+        metric2Title: "Mediteran",
+        metric2Body: "Prisutnost u vinogradarskim, vocarskim i povrtnim kulturama s mediteranskim klimatskim signalima.",
+        metric3Title: "Ucinci",
+        metric3Body: "Efikasnost, selektivnost, fitotoksicnost i ucinci na promatrani i susjedni usjev.",
+        metric4Title: "Dosjei",
+        metric4Body: "Bioloska procjena i zavrsni dokumenti prilagodeni zahtjevima partnera i postupka registracije.",
+        data1Title: "ARM sustav",
+        data1Body: "Certificirani tok izrade finalnog izvjestaja i razmjene podataka s partnerom.",
+        data2Title: "Brzi odgovor",
+        data2Body: "Postavljanje pokusa i povrat informacija tijekom cijelog trajanja projekta.",
+        data3Title: "Stvarna polja",
+        data3Body: "Ne simulacija, nego pokusi u produkcijskom i lokalno relevantnom okruzenju.",
+        data4Title: "Kontrola rokova",
+        data4Body: "Jasni dogovori, privremena izvjesca i zavrsna isporuka bez gubljenja konteksta.",
+        flowKicker: "Tok projekta",
+        flowTitle: "Od zahtjeva za pokus do zavrsnog izvjestaja bez praznog hoda.",
+        flowLead: "Svaka faza ima jasnu svrhu: definirati pokus, provesti ga u odgovarajucim uvjetima i pretvoriti rezultate u dokumentaciju spremnu za daljnju uporabu.",
+        flowStep1Title: "Definicija pokusa",
+        flowStep1Body: "Uskladivanje kulture, aktivne tvari, ciljanih stetnih organizama i trazenog regulatornog ishoda.",
+        flowStep2Title: "Odabir lokaliteta",
+        flowStep2Body: "Parcele, vinogradi i vocnjaci biraju se prema klimatskoj zoni, agronomskom kontekstu i trazenim uvjetima.",
+        flowStep3Title: "Provedba i pracenje",
+        flowStep3Body: "Terenski tim vodi pokus, biljezi rezultate i komunicira s partnerom tijekom kljucnih faza promatranja.",
+        flowStep4Title: "ARM izvjesce",
+        flowStep4Body: "Privremena i zavrsna izvjesca strukturiraju podatke tako da budu spremni za internu evaluaciju i registraciju.",
+        trustKicker: "Suradnja i ekspertiza",
+        trustTitle: "Kredibilitet dolazi iz institucija, ali i iz ljudi koji znaju sto gledaju na terenu.",
+        trustLead: "Institucionalna suradnja i iskustvo strucnih suradnika daju dodatnu sigurnost u planiranju, provedbi i tumacenju rezultata poljskih pokusa.",
+        institutionsKicker: "Institucije",
+        institution1Body: "Klasicni akademski autoritet za agronomiju i prirodni partner za vjerodostojnost istrazivanja.",
+        institution2Body: "Relevantan za kontinentalne kulture, operativnu suradnju i strucnu razmjenu.",
+        institution3Body: "Klucan dio mediteranskog i jadranskog agronomskog konteksta.",
+        institution4Body: "Dodatna institucionalna tezina za pokuse i kulturoloski relevantne uvjete.",
+        expertsKicker: "Suradnici",
+        expert1Role: "Suradnik za ratarstvo",
+        expert2Role: "Suradnik za vinogradarstvo",
+        expert3Role: "Suradnik za vocarstvo",
+        expert4Role: "Suradnik za mediteranske i povrcarske kulture",
+        contactKicker: "Sljedeci korak",
+        contactTitle: "Ako trebate pouzdan pokus i izvjestaj spreman za regulatorni postupak, vrijeme je za razgovor.",
+        contactLead: "Javite nam osnovne zahtjeve projekta i zajedno cemo odrediti opseg pokusa, odgovarajuce lokalitete i model izvjestavanja koji najbolje odgovara vasem postupku.",
+        contactPrimaryCta: "Nazovite +385 99 845 6776",
+        contactSecondaryCta: "Posaljite email",
+        contactLine1Title: "Tvrtka",
+        contactLine2Title: "Izvrsni direktor",
+        contactLine3Title: "Email",
+        contactLine4Title: "Telefon",
+        contactLine5Title: "Adresa",
+        footerText: "PEST PRO d.o.o. · Poljski pokusi, ispitivanje ucinkovitosti i regulatorna dokumentacija",
+        footerCopyright: "&copy; 2026 PestPro",
+        navToggleLabel: "Otvori navigaciju",
+        navToggleCloseLabel: "Zatvori navigaciju",
+        themeToggleLabel: "Promijeni temu",
+        languageSelectLabel: "Odabir jezika",
+        panelPrevLabel: "Prethodna slika",
+        panelNextLabel: "Sljedeca slika",
+        panelControlsLabel: "Promjena hero slike"
+      },
+      en: {
+        brandSubtitle: "Field trials and product registration",
+        navStory: "Overview",
+        navCoverage: "Trials",
+        navFlow: "Process",
+        navTrust: "Network",
+        navContact: "Contact",
+        headerCta: "Schedule a meeting",
+        heroOverviewKicker: "About",
+        heroOverviewTitle: "A specialized partner for plant protection product registration and field-trial execution in Croatia.",
+        heroLead: "PEST PRO brings together agronomists and technical collaborators experienced in efficacy testing and plant protection product registration in Croatia. The company secures equipment, plots, vineyards and orchards through cooperation with local growers across Croatia, covering the south-eastern and Mediterranean EPPO climate zones.",
+        heroMeta1Title: "Two EPPO zones",
+        heroMeta1Body: "The south-eastern and Mediterranean zones are covered through a network of plots, vineyards and orchards in Croatia.",
+        heroMeta2Title: "Field specialists",
+        heroMeta2Body: "Agronomists and technical collaborators manage trial execution, result monitoring and communication throughout the project.",
+        heroMeta3Title: "Fast response and deadlines",
+        heroMeta3Body: "Partners receive rapid trial setup, data exchange and disciplined delivery against agreed timelines.",
+        heroGalleryKicker: "Services and trials",
+        heroGalleryTitle: "Field trials and efficacy studies across a wide range of plant protection products in Croatia.",
+        heroGalleryLead: "Field trials are conducted according to GEP and EPPO standards, while final reports are prepared in the certified ARM system or adapted to the partner's reporting format.",
+        galleryCard1Title: "Sites",
+        galleryCard1Desc: "A network of plots, vineyards and orchards selected according to climate zone and trial objective.",
+        galleryCard1Cta: "Details",
+        galleryCard2Title: "Crops",
+        galleryCard2Desc: "Arable, viticulture, fruit and vegetable production across different product categories.",
+        galleryCard2Cta: "Details",
+        galleryCard3Title: "Project focus",
+        galleryCard3Desc: "A relevant site, a controlled trial and reporting prepared for evaluation, registration and business decisions.",
+        galleryCard3Cta: "Details",
+        heroPrimaryCta: "Start the discussion",
+        heroSecondaryCta: "View services",
+        strip1Title: "2015",
+        strip1Body: "Company founded in Zagreb",
+        strip2Title: "10+",
+        strip2Body: "Agronomists and technical collaborators",
+        strip3Title: "ARM",
+        strip3Body: "Certified reporting workflow",
+        strip4Title: "Croatia",
+        strip4Body: "Nationwide trial coverage",
+        storyKicker: "Technical support",
+        storyTitle: "Field capacity, regulatory discipline and reporting in one process.",
+        storyLead: "PEST PRO brings together agronomic experts, trial sites and the reporting structure needed for high-quality research execution. The objective is clear: run the trial precisely and deliver an output with business and regulatory value.",
+        storyCard1Title: "Service scope",
+        storyCard1Body: "Field trials and efficacy assessments for different categories of plant protection products in Croatia.",
+        storyCard1Item1: "fungicides",
+        storyCard1Item2: "herbicides",
+        storyCard1Item3: "insecticides and acaricides",
+        storyCard1Item4: "growth regulators and biostimulants",
+        storyCard2Title: "Operating standard",
+        storyCard2Body: "Trials rely on field execution, standards and documentation that support real decision-making.",
+        storyCard2Item1: "GEP and EPPO compliance",
+        storyCard2Item2: "ARM final reports",
+        storyCard2Item3: "institutional cooperation",
+        storyCard2Item4: "local agronomic experts",
+        storyCard3Title: "For the partner, this means",
+        storyCard3Body: "One point of contact for trial planning, execution on relevant sites and final reporting ready for internal review and registration.",
+        coverageKicker: "Coverage and data",
+        coverageTitle: "Field capacity is built on sites, crops and disciplined reporting.",
+        coverageLead: "A trial has value only when the site is well selected, the execution is consistent and the data remains useful after the field phase is complete.",
+        coverageModelKicker: "Operating model",
+        coverageModelBody: "PEST PRO secures the required equipment, plots, vineyards and orchards through agreements with local growers across Croatia. Each project starts with preparation and the selection of conditions that match the study objective.",
+        metric1Title: "South-east",
+        metric1Body: "Trials in continental conditions for crops and scenarios that require different levels of disease and weed pressure.",
+        metric2Title: "Mediterranean",
+        metric2Body: "Presence in vineyard, fruit and vegetable crops under Mediterranean climate signals.",
+        metric3Title: "Effects",
+        metric3Body: "Efficacy, selectivity, phytotoxicity and effects on the observed and neighbouring crop.",
+        metric4Title: "Dossiers",
+        metric4Body: "Biological assessment and final documents tailored to partner requirements and the registration process.",
+        data1Title: "ARM system",
+        data1Body: "Certified workflow for producing the final report and exchanging data with the partner.",
+        data2Title: "Fast response",
+        data2Body: "Trial setup and timely feedback throughout the full project duration.",
+        data3Title: "Real fields",
+        data3Body: "Not simulation, but trials in production-like and locally relevant conditions.",
+        data4Title: "Schedule control",
+        data4Body: "Clear agreements, interim reports and final delivery without losing context.",
+        flowKicker: "Project flow",
+        flowTitle: "From trial request to final report without dead time.",
+        flowLead: "Each phase has a clear purpose: define the trial, run it in the right conditions and turn the results into documentation ready for the next step.",
+        flowStep1Title: "Trial definition",
+        flowStep1Body: "Alignment of crop, active substance, target harmful organism and the required regulatory outcome.",
+        flowStep2Title: "Site selection",
+        flowStep2Body: "Plots, vineyards and orchards are selected according to climate zone, agronomic context and required conditions.",
+        flowStep3Title: "Execution and monitoring",
+        flowStep3Body: "The field team manages the trial, records results and communicates with the partner during key observation stages.",
+        flowStep4Title: "ARM report",
+        flowStep4Body: "Interim and final reports structure the data so it is ready for internal evaluation and registration.",
+        trustKicker: "Cooperation and expertise",
+        trustTitle: "Credibility comes from institutions, but also from people who know what they are seeing in the field.",
+        trustLead: "Institutional cooperation and experienced collaborators add confidence to planning, execution and interpretation of field-trial results.",
+        institutionsKicker: "Institutions",
+        institution1Body: "A classic academic authority in agronomy and a natural partner for research credibility.",
+        institution2Body: "Relevant for continental crops, operational cooperation and expert exchange.",
+        institution3Body: "A key part of the Mediterranean and Adriatic agronomic context.",
+        institution4Body: "Additional institutional weight for trials and locally relevant crop conditions.",
+        expertsKicker: "Collaborators",
+        expert1Role: "Arable crops collaborator",
+        expert2Role: "Viticulture collaborator",
+        expert3Role: "Fruit production collaborator",
+        expert4Role: "Mediterranean and vegetable crops collaborator",
+        contactKicker: "Next step",
+        contactTitle: "If you need a reliable trial and a report ready for regulatory review, it is time to talk.",
+        contactLead: "Send us the basic project requirements and we will define the scope of the trial, the right sites and the reporting model that best supports your process.",
+        contactPrimaryCta: "Call +385 99 845 6776",
+        contactSecondaryCta: "Send email",
+        contactLine1Title: "Company",
+        contactLine2Title: "Managing Director",
+        contactLine3Title: "Email",
+        contactLine4Title: "Phone",
+        contactLine5Title: "Address",
+        footerText: "PEST PRO d.o.o. · Field trials, efficacy testing and regulatory documentation",
+        footerCopyright: "&copy; 2026 PestPro",
+        navToggleLabel: "Open navigation",
+        navToggleCloseLabel: "Close navigation",
+        themeToggleLabel: "Change theme",
+        languageSelectLabel: "Language selector",
+        panelPrevLabel: "Previous image",
+        panelNextLabel: "Next image",
+        panelControlsLabel: "Change hero image"
+      },
+      de: {
+        brandSubtitle: "Feldversuche und Produktzulassung",
+        navStory: "Ueberblick",
+        navCoverage: "Versuche",
+        navFlow: "Prozess",
+        navTrust: "Netzwerk",
+        navContact: "Kontakt",
+        headerCta: "Gespaech vereinbaren",
+        heroOverviewKicker: "Ueber uns",
+        heroOverviewTitle: "Spezialisierter Partner fuer die Zulassung von Pflanzenschutzmitteln und die Durchfuehrung von Feldversuchen in Kroatien.",
+        heroLead: "PEST PRO vereint Agronomen und technische Fachkraefte mit Erfahrung in Wirksamkeitspruefungen und der Zulassung von Pflanzenschutzmitteln in Kroatien. Das Unternehmen sichert Ausruestung, Flaechen, Weinberge und Obstanlagen in Zusammenarbeit mit lokalen Landwirten in ganz Kroatien und deckt damit die suedosteuropaeische und mediterrane EPPO-Klimazone ab.",
+        heroMeta1Title: "Zwei EPPO-Zonen",
+        heroMeta1Body: "Die suedosteuropaeische und mediterrane Zone werden ueber ein Netzwerk von Flaechen, Weinbergen und Obstanlagen in Kroatien abgedeckt.",
+        heroMeta2Title: "Fachleute im Feld",
+        heroMeta2Body: "Agronomen und technische Fachkraefte steuern die Versuchsdurchfuehrung, Beobachtung und Kommunikation waehrend des Projekts.",
+        heroMeta3Title: "Schnelle Reaktion und Fristen",
+        heroMeta3Body: "Partner erhalten einen schnellen Versuchsaufbau, Datenaustausch und zuverlaessige Lieferung gemaess vereinbarten Fristen.",
+        heroGalleryKicker: "Leistungen und Versuche",
+        heroGalleryTitle: "Feldversuche und Wirksamkeitspruefungen fuer ein breites Spektrum von Pflanzenschutzmitteln in Kroatien.",
+        heroGalleryLead: "Feldversuche werden gemaess GEP- und EPPO-Standards durchgefuehrt, waehrend Abschlussberichte im zertifizierten ARM-System oder im Format des Partners erstellt werden.",
+        galleryCard1Title: "Standorte",
+        galleryCard1Desc: "Ein Netzwerk aus Flaechen, Weinbergen und Obstanlagen, abgestimmt auf Klimazone und Versuchsziel.",
+        galleryCard1Cta: "Details",
+        galleryCard2Title: "Kulturen",
+        galleryCard2Desc: "Ackerbau, Weinbau, Obstbau und Gemueseproduktion fuer verschiedene Produktkategorien.",
+        galleryCard2Cta: "Details",
+        galleryCard3Title: "Projektfokus",
+        galleryCard3Desc: "Ein relevanter Standort, ein kontrollierter Versuch und Berichte fuer Bewertung, Zulassung und Geschaeftsentscheidungen.",
+        galleryCard3Cta: "Details",
+        heroPrimaryCta: "Gespaech starten",
+        heroSecondaryCta: "Leistungen ansehen",
+        strip1Title: "2015",
+        strip1Body: "Unternehmen in Zagreb gegruendet",
+        strip2Title: "10+",
+        strip2Body: "Agronomen und technische Partner",
+        strip3Title: "ARM",
+        strip3Body: "Zertifizierter Berichtsprozess",
+        strip4Title: "Kroatien",
+        strip4Body: "Landesweite Versuchsabdeckung",
+        storyKicker: "Technische Unterstuetzung",
+        storyTitle: "Feldkapazitaet, regulatorische Disziplin und Berichterstattung in einem Prozess.",
+        storyLead: "PEST PRO verbindet agronomische Fachleute, Versuchsflaechen und die Berichtsstruktur, die fuer eine hochwertige Durchfuehrung von Untersuchungen erforderlich ist. Das Ziel ist klar: den Versuch praezise fuehren und ein Ergebnis mit unternehmerischem und regulatorischem Wert liefern.",
+        storyCard1Title: "Leistungsumfang",
+        storyCard1Body: "Feldversuche und Wirksamkeitspruefungen fuer verschiedene Kategorien von Pflanzenschutzmitteln in Kroatien.",
+        storyCard1Item1: "Fungizide",
+        storyCard1Item2: "Herbizide",
+        storyCard1Item3: "Insektizide und Akarizide",
+        storyCard1Item4: "Wachstumsregulatoren und Biostimulanzien",
+        storyCard2Title: "Arbeitsstandard",
+        storyCard2Body: "Versuche beruhen auf Feldarbeit, Standards und Dokumentation, die reale Entscheidungen unterstuetzen.",
+        storyCard2Item1: "GEP- und EPPO-Konformitaet",
+        storyCard2Item2: "ARM-Abschlussberichte",
+        storyCard2Item3: "institutionelle Zusammenarbeit",
+        storyCard2Item4: "lokale agronomische Fachleute",
+        storyCard3Title: "Das bedeutet fuer den Partner",
+        storyCard3Body: "Ein Ansprechpartner fuer Versuchsplanung, Durchfuehrung an relevanten Standorten und Abschlussberichte fuer interne Bewertung und Zulassung.",
+        coverageKicker: "Abdeckung und Daten",
+        coverageTitle: "Feldkapazitaet entsteht durch Standorte, Kulturen und disziplinierte Berichterstattung.",
+        coverageLead: "Ein Versuch hat nur dann Wert, wenn der Standort gut gewaehlt ist, die Durchfuehrung konsistent bleibt und die Daten auch nach der Feldphase nutzbar sind.",
+        coverageModelKicker: "Arbeitsmodell",
+        coverageModelBody: "PEST PRO sichert die erforderliche Ausruestung, Parzellen, Weinberge und Obstanlagen ueber Vereinbarungen mit lokalen Landwirten in ganz Kroatien. Jedes Projekt beginnt mit Vorbereitung und der Auswahl von Bedingungen, die zum Untersuchungsziel passen.",
+        metric1Title: "Suedosten",
+        metric1Body: "Versuche unter kontinentalen Bedingungen fuer Kulturen und Szenarien mit anderem Krankheits- und Unkrautdruck.",
+        metric2Title: "Mittelmeer",
+        metric2Body: "Praesenz in Weinbau-, Obst- und Gemuesekulturen unter mediterranen Klimasignalen.",
+        metric3Title: "Wirkungen",
+        metric3Body: "Wirksamkeit, Selektivitaet, Phytotoxizitaet und Effekte auf beobachtete und benachbarte Kulturen.",
+        metric4Title: "Dossiers",
+        metric4Body: "Biologische Bewertung und Abschlussdokumente angepasst an Partneranforderungen und Zulassungsverfahren.",
+        data1Title: "ARM-System",
+        data1Body: "Zertifizierter Prozess fuer Abschlussberichte und Datenaustausch mit dem Partner.",
+        data2Title: "Schnelle Rueckmeldung",
+        data2Body: "Versuchsaufbau und zeitnahe Rueckmeldungen waehrend der gesamten Projektdauer.",
+        data3Title: "Reale Felder",
+        data3Body: "Keine Simulation, sondern Versuche unter produktionsnahen und lokal relevanten Bedingungen.",
+        data4Title: "Terminkontrolle",
+        data4Body: "Klare Absprachen, Zwischenberichte und Abschlusslieferung ohne Kontextverlust.",
+        flowKicker: "Projektablauf",
+        flowTitle: "Vom Versuchsauftrag bis zum Abschlussbericht ohne Leerlauf.",
+        flowLead: "Jede Phase hat einen klaren Zweck: den Versuch definieren, unter passenden Bedingungen durchfuehren und die Ergebnisse in einsatzbereite Dokumentation ueberfuehren.",
+        flowStep1Title: "Versuchsdefinition",
+        flowStep1Body: "Abstimmung von Kultur, Wirkstoff, Zielschadorganismus und dem geforderten regulatorischen Ergebnis.",
+        flowStep2Title: "Standortwahl",
+        flowStep2Body: "Parzellen, Weinberge und Obstanlagen werden nach Klimazone, agronomischem Kontext und geforderten Bedingungen ausgewaehlt.",
+        flowStep3Title: "Durchfuehrung und Monitoring",
+        flowStep3Body: "Das Feldteam fuehrt den Versuch durch, dokumentiert Ergebnisse und kommuniziert mit dem Partner in den entscheidenden Beobachtungsphasen.",
+        flowStep4Title: "ARM-Bericht",
+        flowStep4Body: "Zwischen- und Abschlussberichte strukturieren die Daten fuer interne Bewertung und Zulassung.",
+        trustKicker: "Zusammenarbeit und Expertise",
+        trustTitle: "Glaubwuerdigkeit entsteht durch Institutionen und durch Menschen, die im Feld wissen, worauf sie achten muessen.",
+        trustLead: "Institutionelle Zusammenarbeit und erfahrene Fachpartner geben zusaetzliche Sicherheit bei Planung, Durchfuehrung und Interpretation von Feldversuchen.",
+        institutionsKicker: "Institutionen",
+        institution1Body: "Eine klassische akademische Autoritaet der Agronomie und ein natuerlicher Partner fuer wissenschaftliche Glaubwuerdigkeit.",
+        institution2Body: "Relevant fuer kontinentale Kulturen, operative Zusammenarbeit und fachlichen Austausch.",
+        institution3Body: "Ein wichtiger Bestandteil des mediterranen und adriatischen agronomischen Kontexts.",
+        institution4Body: "Zusaetzliches institutionelles Gewicht fuer Versuche und lokal relevante Kulturbedingungen.",
+        expertsKicker: "Fachpartner",
+        expert1Role: "Fachpartner fuer Ackerbau",
+        expert2Role: "Fachpartner fuer Weinbau",
+        expert3Role: "Fachpartner fuer Obstbau",
+        expert4Role: "Fachpartner fuer mediterrane und Gemuesekulturen",
+        contactKicker: "Naechster Schritt",
+        contactTitle: "Wenn Sie einen verlaesslichen Versuch und einen berichtsreifen Output fuer regulatorische Verfahren brauchen, ist es Zeit fuer ein Gespraech.",
+        contactLead: "Senden Sie uns die grundlegenden Projektanforderungen und wir definieren gemeinsam den Versuchsumfang, die richtigen Standorte und das passende Berichtsmodell fuer Ihren Prozess.",
+        contactPrimaryCta: "Anrufen +385 99 845 6776",
+        contactSecondaryCta: "E-Mail senden",
+        contactLine1Title: "Unternehmen",
+        contactLine2Title: "Geschaeftsfuehrung",
+        contactLine3Title: "E-Mail",
+        contactLine4Title: "Telefon",
+        contactLine5Title: "Adresse",
+        footerText: "PEST PRO d.o.o. · Feldversuche, Wirksamkeitspruefungen und regulatorische Dokumentation",
+        footerCopyright: "&copy; 2026 PestPro",
+        navToggleLabel: "Navigation oeffnen",
+        navToggleCloseLabel: "Navigation schliessen",
+        themeToggleLabel: "Design wechseln",
+        languageSelectLabel: "Sprachauswahl",
+        panelPrevLabel: "Vorheriges Bild",
+        panelNextLabel: "Naechstes Bild",
+        panelControlsLabel: "Hero-Bild wechseln"
+      }
+    };
+
+
+
+    let parallaxFrame = 0;
+
+    function clamp(value, min, max) {
+      return Math.min(Math.max(value, min), max);
+    }
+
+    function updateParallax() {
+      parallaxFrame = 0;
+
+      if (prefersReducedMotion || window.innerWidth <= 780) {
+        parallaxItems.forEach((item) => item.style.setProperty("--parallax-y", "0px"));
+        return;
+      }
+
+      const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
+      const limit = parseFloat(getComputedStyle(root).getPropertyValue("--parallax-limit")) || 58;
+
+      parallaxItems.forEach((item) => {
+        const speed = parseFloat(item.dataset.parallaxSpeed || "0.04");
+        const rect = item.getBoundingClientRect();
+
+        if (rect.bottom < -120 || rect.top > viewportHeight + 120) {
+          return;
+        }
+
+        const itemCenter = rect.top + rect.height / 2;
+        const viewportCenter = viewportHeight / 2;
+        const y = clamp((itemCenter - viewportCenter) * speed, -limit, limit);
+        item.style.setProperty("--parallax-y", `${y.toFixed(2)}px`);
+      });
+    }
+
+    function requestParallaxUpdate() {
+      if (!parallaxFrame) {
+        parallaxFrame = window.requestAnimationFrame(updateParallax);
+      }
+    }
+
+    function applyTheme(theme) {
+      root.dataset.theme = theme;
+      themeLabel.textContent = themeWords[currentLanguage][theme];
+      themeToggle.setAttribute("aria-pressed", String(theme === "dark"));
+      startCanvas();
+    }
+
+    function resolveInitialTheme() {
+      const storedTheme = localStorage.getItem("pestpro-theme");
+      if (storedTheme === "light" || storedTheme === "dark") {
+        return storedTheme;
+      }
+      return "light";
+    }
+
+    function resolveInitialLanguage() {
+      const storedLanguage = localStorage.getItem("pestpro-language");
+      if (storedLanguage === "hr" || storedLanguage === "en" || storedLanguage === "de") {
+        return storedLanguage;
+      }
+      return "hr";
+    }
+
+    function setTextContent(id, value) {
+      const element = document.getElementById(id);
+      if (element) {
+        element.textContent = value;
+      }
+    }
+
+    function setHtmlContent(id, value) {
+      const element = document.getElementById(id);
+      if (element) {
+        element.innerHTML = value;
+      }
+    }
+
+    function applyLanguage(lang) {
+      currentLanguage = lang;
+      root.lang = lang;
+      languageSelect.value = lang;
+      localStorage.setItem("pestpro-language", lang);
+
+      const t = translations[lang];
+      Object.entries(t).forEach(([key, value]) => {
+        if (key === "footerCopyright") {
+          setHtmlContent(key, value);
+        } else if (document.getElementById(key)) {
+          setTextContent(key, value);
+        }
+      });
+
+      heroEyebrow.textContent = staticHeroCopy[lang].eyebrow;
+      heroTitle.innerHTML = staticHeroCopy[lang].title;
+
+      navToggle.setAttribute("aria-label", siteNav.dataset.open === "true" ? t.navToggleCloseLabel : t.navToggleLabel);
+      themeToggle.setAttribute("aria-label", t.themeToggleLabel);
+      languageSelect.setAttribute("aria-label", t.languageSelectLabel);
+      if (galleryPrev) {
+        galleryPrev.setAttribute("aria-label", t.panelPrevLabel);
+      }
+      if (galleryNext) {
+        galleryNext.setAttribute("aria-label", t.panelNextLabel);
+      }
+
+      applyTheme(root.dataset.theme || resolveInitialTheme());
+    }
+
+    languageSelect.addEventListener("change", () => {
+      applyLanguage(languageSelect.value);
+    });
+
+    themeToggle.addEventListener("click", () => {
+      const nextTheme = root.dataset.theme === "light" ? "dark" : "light";
+      localStorage.setItem("pestpro-theme", nextTheme);
+      applyTheme(nextTheme);
+    });
+
+    systemLight.addEventListener("change", (event) => {
+      if (!localStorage.getItem("pestpro-theme")) {
+        applyTheme(event.matches ? "light" : "dark");
+      }
+    });
+
+    function toggleNav() {
+      const isOpen = siteNav.dataset.open === "true";
+      const next = String(!isOpen);
+      siteNav.dataset.open = next;
+      navToggle.setAttribute("aria-expanded", next);
+      navToggle.setAttribute("aria-label", next === "true" ? translations[currentLanguage].navToggleCloseLabel : translations[currentLanguage].navToggleLabel);
+    }
+
+    navToggle.addEventListener("click", toggleNav);
+
+    siteNav.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", () => {
+        if (window.innerWidth <= 780) {
+          siteNav.dataset.open = "false";
+          navToggle.setAttribute("aria-expanded", "false");
+        }
+      });
+    });
+
+    function initGallerySlider() {
+      if (!galleryTrack || !galleryPrev || !galleryNext || !galleryCards.length) {
+        return;
+      }
+      let currentIndex = 0;
+      let touchStartX = 0;
+      let touchStartY = 0;
+      const sliderViewport = galleryTrack;
+      const isMobileSlider = () => window.matchMedia("(max-width: 767px)").matches;
+
+      function centerSlide(index) {
+        const card = galleryCards[index];
+        if (!card || !sliderViewport) {
+          return;
+        }
+
+        const axis = isMobileSlider() ? "top" : "left";
+        const size = isMobileSlider() ? "clientHeight" : "clientWidth";
+        const start = isMobileSlider() ? card.offsetTop : card.offsetLeft;
+
+        sliderViewport.scrollTo({
+          [axis]: start - (sliderViewport[size] / 2 - card[size] / 2),
+          behavior: "smooth"
+        });
+      }
+
+      function toggleGalleryUi(index) {
+        galleryCards.forEach((card, cardIndex) => {
+          if (cardIndex === index) {
+            card.setAttribute("active", "");
+          } else {
+            card.removeAttribute("active");
+          }
+        });
+
+        galleryPrev.disabled = index === 0;
+        galleryNext.disabled = index === galleryCards.length - 1;
+      }
+
+      function activateSlide(index, scrollToSlide) {
+        const nextIndex = Math.min(Math.max(index, 0), galleryCards.length - 1);
+        if (nextIndex === currentIndex && scrollToSlide) {
+          centerSlide(nextIndex);
+          return;
+        }
+        currentIndex = nextIndex;
+        toggleGalleryUi(currentIndex);
+        if (scrollToSlide) {
+          centerSlide(currentIndex);
+        }
+      }
+
+      function moveSlide(step) {
+        activateSlide(currentIndex + step, true);
+      }
+
+      galleryPrev.addEventListener("click", () => moveSlide(-1));
+      galleryNext.addEventListener("click", () => moveSlide(1));
+
+      galleryCards.forEach((card, index) => {
+        card.addEventListener("mouseenter", () => {
+          if (window.matchMedia("(hover: hover)").matches) {
+            activateSlide(index, true);
+          }
+        });
+        card.addEventListener("click", () => activateSlide(index, true));
+      });
+
+      galleryTrack.addEventListener("touchstart", (event) => {
+        touchStartX = event.touches[0].clientX;
+        touchStartY = event.touches[0].clientY;
+      }, { passive: true });
+
+      galleryTrack.addEventListener("touchend", (event) => {
+        const dx = event.changedTouches[0].clientX - touchStartX;
+        const dy = event.changedTouches[0].clientY - touchStartY;
+        const distance = isMobileSlider() ? dy : dx;
+        if (Math.abs(distance) > 60) {
+          moveSlide(distance > 0 ? -1 : 1);
+        }
+      }, { passive: true });
+
+      window.addEventListener("keydown", (event) => {
+        if (["ArrowRight", "ArrowDown"].includes(event.key)) {
+          moveSlide(1);
+        }
+        if (["ArrowLeft", "ArrowUp"].includes(event.key)) {
+          moveSlide(-1);
+        }
+      }, { passive: true });
+
+      window.addEventListener("resize", () => centerSlide(currentIndex));
+
+      toggleGalleryUi(0);
+      centerSlide(0);
+    }
+
+    applyLanguage(resolveInitialLanguage());
+    initGallerySlider();
+
+    var width = 0;
+    var height = 0;
+    var animationFrame = 0;
+    var themeTokens = {};
+
+    function extractRgbTriplet(value) {
+      const matches = value.match(/\d+(\.\d+)?/g) || [];
+      return matches.slice(0, 3).join(", ");
+    }
+
+    function readThemeTokens() {
+      const styles = getComputedStyle(root);
+      themeTokens = {
+        bandA: styles.getPropertyValue("--canvas-band-a").trim(),
+        bandB: styles.getPropertyValue("--canvas-band-b").trim(),
+        bandC: styles.getPropertyValue("--canvas-band-c").trim(),
+        glowA: styles.getPropertyValue("--hero-glow-a").trim(),
+        glowB: styles.getPropertyValue("--hero-glow-b").trim()
+      };
+    }
+
+    function resizeCanvas() {
+      readThemeTokens();
+      width = canvas.offsetWidth;
+      height = canvas.offsetHeight;
+      const dpr = window.devicePixelRatio || 1;
+      canvas.width = Math.floor(width * dpr);
+      canvas.height = Math.floor(height * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    }
+
+    function drawBands() {
+      const gradient = ctx.createLinearGradient(0, 0, width, height);
+      gradient.addColorStop(0, themeTokens.bandA);
+      gradient.addColorStop(0.5, themeTokens.bandB);
+      gradient.addColorStop(1, themeTokens.bandC);
+
+      ctx.save();
+      ctx.strokeStyle = gradient;
+      ctx.lineWidth = 2;
+
+      const curveOffset = Math.sin(Date.now() * 0.00035) * 24;
+
+      ctx.beginPath();
+      ctx.moveTo(-40, height * 0.72);
+      ctx.bezierCurveTo(width * 0.18, height * 0.54 + curveOffset, width * 0.46, height * 0.83 - curveOffset, width * 0.75, height * 0.58);
+      ctx.bezierCurveTo(width * 0.88, height * 0.47, width * 0.94, height * 0.5, width + 40, height * 0.36);
+      ctx.stroke();
+
+      ctx.beginPath();
+      ctx.moveTo(-20, height * 0.34);
+      ctx.bezierCurveTo(width * 0.14, height * 0.28, width * 0.32, height * 0.42, width * 0.52, height * 0.23);
+      ctx.bezierCurveTo(width * 0.72, height * 0.04, width * 0.88, height * 0.18, width + 30, height * 0.12);
+      ctx.stroke();
+      ctx.restore();
+    }
+
+    function drawGlow() {
+      const glowLeft = ctx.createRadialGradient(width * 0.18, height * 0.28, 20, width * 0.18, height * 0.28, width * 0.28);
+      glowLeft.addColorStop(0, themeTokens.glowA);
+      glowLeft.addColorStop(1, "transparent");
+
+      const glowRight = ctx.createRadialGradient(width * 0.82, height * 0.22, 10, width * 0.82, height * 0.22, width * 0.22);
+      glowRight.addColorStop(0, themeTokens.glowB);
+      glowRight.addColorStop(1, "transparent");
+
+      ctx.save();
+      ctx.fillStyle = glowLeft;
+      ctx.fillRect(0, 0, width, height);
+      ctx.fillStyle = glowRight;
+      ctx.fillRect(0, 0, width, height);
+      ctx.restore();
+    }
+
+    function render() {
+      ctx.clearRect(0, 0, width, height);
+      drawGlow();
+      drawBands();
+      animationFrame = window.requestAnimationFrame(render);
+    }
+
+    function startCanvas() {
+      resizeCanvas();
+      if (!prefersReducedMotion) {
+        cancelAnimationFrame(animationFrame);
+        render();
+      } else {
+        ctx.clearRect(0, 0, width, height);
+        drawGlow();
+        drawBands();
+      }
+    }
+
+
+
+    function initInstitutionOrbit() {
+      const orbit = document.querySelector(".institution-orbit");
+      if (!orbit || !window.gsap) return;
+
+      if (window.ScrollTrigger) {
+        gsap.registerPlugin(ScrollTrigger);
+      }
+
+      const lines = orbit.querySelectorAll(".institution-line-path");
+      lines.forEach((line) => {
+        const length = line.getTotalLength();
+        gsap.set(line, { strokeDasharray: length, strokeDashoffset: length });
+      });
+
+      if (!prefersReducedMotion) {
+        const tl = gsap.timeline(window.ScrollTrigger ? {
+          scrollTrigger: {
+            trigger: orbit,
+            start: "top 78%",
+            once: true
+          }
+        } : {});
+
+        tl.from(orbit.querySelector(".gsap-trust-scale"), {
+          scale: 0.72,
+          opacity: 0,
+          duration: 0.9,
+          ease: "back.out(1.2)"
+        })
+          .from(orbit.querySelector(".gsap-trust-pop"), {
+            scale: 0,
+            rotation: -10,
+            opacity: 0,
+            duration: 0.65,
+            ease: "back.out(1.8)"
+          }, "-=0.45")
+          .to(lines, {
+            strokeDashoffset: 0,
+            duration: 1.1,
+            ease: "power2.inOut",
+            stagger: { amount: 0.35, from: "center" }
+          }, "-=0.2")
+          .from(orbit.querySelectorAll(".institution-node"), {
+            scale: 0.82,
+            y: 18,
+            opacity: 0,
+            duration: 0.55,
+            stagger: 0.08,
+            ease: "back.out(1.4)"
+          }, "-=0.55");
+
+        gsap.utils.toArray(".float-trust").forEach((node, index) => {
+          gsap.to(node, {
+            y: "-=8",
+            rotation: 1.2,
+            duration: 2.4 + index * 0.18,
+            repeat: -1,
+            yoyo: true,
+            ease: "sine.inOut",
+            delay: index * 0.1
+          });
+        });
+
+        gsap.utils.toArray(".float-trust-alt").forEach((node, index) => {
+          gsap.to(node, {
+            y: "+=8",
+            rotation: -1.2,
+            duration: 2.6 + index * 0.18,
+            repeat: -1,
+            yoyo: true,
+            ease: "sine.inOut",
+            delay: index * 0.12
+          });
+        });
+
+        gsap.to(".float-trust-slow", {
+          y: "-=5",
+          duration: 2,
+          repeat: -1,
+          yoyo: true,
+          ease: "sine.inOut"
+        });
+      } else {
+        lines.forEach((line) => gsap.set(line, { strokeDashoffset: 0 }));
+      }
+
+      orbit.querySelectorAll(".institution-node").forEach((node) => {
+        node.addEventListener("mouseenter", () => {
+          gsap.to(node, { scale: 1.04, duration: 0.25, ease: "back.out(1.8)", overwrite: "auto" });
+        });
+
+        node.addEventListener("mouseleave", () => {
+          gsap.to(node, { scale: 1, duration: 0.25, ease: "power2.out", overwrite: "auto" });
+        });
+      });
+    }
+
+    window.addEventListener("scroll", requestParallaxUpdate, { passive: true });
+    window.addEventListener("resize", () => {
+      startCanvas();
+      requestParallaxUpdate();
+    });
+    requestParallaxUpdate();
+    applyTheme(resolveInitialTheme());
+    initInstitutionOrbit();
+  </script>
+</body>
+</html>
